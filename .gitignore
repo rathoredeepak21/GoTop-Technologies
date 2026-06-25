@@ -1,0 +1,15 @@
+# Dependencies
+frontend/node_modules/
+
+# Local env files (credentials)
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Production Build Output
+frontend/dist/
+
+# IDE / System files
+.gemini/
+.DS_Store
+Thumbs.db
