@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
-import { Info, Save, CheckCircle2, ShieldAlert, Plus, Trash2, User, Milestone } from 'lucide-react';
+import { Info, Save, CheckCircle2, ShieldAlert, Plus, Trash2, User, Milestone, Upload, RefreshCw } from 'lucide-react';
+import { supabase } from '../config/supabase';
 
 const ManageAbout = () => {
   const { token } = useAuth();
@@ -73,6 +74,44 @@ const ManageAbout = () => {
     setAboutRoadmaps(aboutRoadmaps.filter((_, i) => i !== index));
   };
 
+  const handleUploadFile = async (e, targetField, leaderIndex = null) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setStatus({ type: 'info', message: 'Uploading image to company-assets storage...' });
+
+    try {
+      const uniqueName = `about-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+      const { data, error } = await supabase.storage
+        .from('company-assets')
+        .upload(uniqueName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (error) throw error;
+
+      // Retrieve public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('company-assets')
+        .getPublicUrl(uniqueName);
+
+      if (leaderIndex !== null) {
+        const updated = [...aboutLeadership];
+        updated[leaderIndex].img = publicUrl;
+        setAboutLeadership(updated);
+      } else if (targetField === 'aboutJourneyImg') {
+        setAboutJourneyImg(publicUrl);
+      }
+
+      setStatus({ type: 'success', message: 'Image successfully uploaded!' });
+      setTimeout(() => setStatus({ type: '', message: '' }), 3000);
+    } catch (err) {
+      console.error('File upload failed:', err);
+      setStatus({ type: 'error', message: 'Failed to upload image: ' + err.message });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -128,9 +167,17 @@ const ManageAbout = () => {
             <div className={`flex items-start space-x-2.5 p-4 rounded-xl border text-xs ${
               status.type === 'success'
                 ? 'bg-green-50 text-green-700 border-green-200'
+                : status.type === 'info'
+                ? 'bg-blue-50 text-blue-700 border-blue-200'
                 : 'bg-red-50 text-red-700 border-red-200'
             }`}>
-              {status.type === 'success' ? <CheckCircle2 className="h-4.5 w-4.5 shrink-0 mt-0.5" /> : <ShieldAlert className="h-4.5 w-4.5 shrink-0 mt-0.5" />}
+              {status.type === 'success' ? (
+                <CheckCircle2 className="h-4.5 w-4.5 shrink-0 mt-0.5" />
+              ) : status.type === 'info' ? (
+                <RefreshCw className="h-4.5 w-4.5 shrink-0 mt-0.5 animate-spin text-[#F97316]" />
+              ) : (
+                <ShieldAlert className="h-4.5 w-4.5 shrink-0 mt-0.5" />
+              )}
               <span className="font-semibold">{status.message}</span>
             </div>
           )}
@@ -194,15 +241,27 @@ const ManageAbout = () => {
               </div>
 
               {/* Journey image */}
-              <div className="space-y-1">
+              <div className="space-y-1 sm:col-span-1">
                 <label className="text-gray-500 text-[10px] font-bold uppercase tracking-wider">Journey Section Image URL</label>
-                <input
-                  type="text"
-                  value={aboutJourneyImg}
-                  onChange={(e) => setAboutJourneyImg(e.target.value)}
-                  className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 px-4 text-sm text-slate-800 placeholder-gray-400 shadow-sm transition-all font-mono"
-                  placeholder="https://images.unsplash.com/..."
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={aboutJourneyImg}
+                    onChange={(e) => setAboutJourneyImg(e.target.value)}
+                    className="flex-1 bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 px-4 text-sm text-slate-800 placeholder-gray-400 shadow-sm transition-all font-mono"
+                    placeholder="https://images.unsplash.com/..."
+                  />
+                  <label className="flex items-center justify-center gap-1.5 cursor-pointer bg-orange-50 hover:bg-orange-100 text-[#F97316] border border-orange-200 px-4 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98] shrink-0">
+                    <Upload className="h-4 w-4" />
+                    <span>Upload</span>
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      className="hidden" 
+                      onChange={(e) => handleUploadFile(e, 'aboutJourneyImg')}
+                    />
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -305,14 +364,25 @@ const ManageAbout = () => {
                     {/* Leader Image URL */}
                     <div className="space-y-1">
                       <label className="text-gray-500 text-[9px] font-bold uppercase tracking-wider">Profile Image URL</label>
-                      <input
-                        type="text"
-                        required
-                        value={leader.img}
-                        onChange={(e) => handleLeaderChange(idx, 'img', e.target.value)}
-                        className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-lg py-2 px-3 text-xs text-slate-800 placeholder-gray-400 shadow-sm transition-all font-mono"
-                        placeholder="https://images.unsplash.com/..."
-                      />
+                      <div className="flex gap-1.5">
+                        <input
+                          type="text"
+                          required
+                          value={leader.img}
+                          onChange={(e) => handleLeaderChange(idx, 'img', e.target.value)}
+                          className="flex-1 bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-lg py-2 px-2 text-xs text-slate-800 placeholder-gray-400 shadow-sm transition-all font-mono"
+                          placeholder="https://images.unsplash.com/..."
+                        />
+                        <label className="flex items-center justify-center p-2 cursor-pointer bg-orange-50 hover:bg-orange-100 text-[#F97316] border border-orange-200 rounded-lg text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98] shrink-0" title="Upload Photo">
+                          <Upload className="h-3.5 w-3.5" />
+                          <input 
+                            type="file" 
+                            accept="image/*"
+                            className="hidden" 
+                            onChange={(e) => handleUploadFile(e, null, idx)}
+                          />
+                        </label>
+                      </div>
                     </div>
                   </div>
                 ))}
