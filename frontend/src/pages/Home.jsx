@@ -87,67 +87,76 @@ const Home = () => {
       <div className="glow-circle-indigo bottom-20 right-10" />
       
       {/* Hero Section */}
-      <section className="relative z-10 pt-16 pb-16 md:pt-24 md:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center bg-cyber-grid">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-6"
-        >
-          {/* Logo Brand Emblem */}
-          <motion.div variants={itemVariants} className="flex justify-center mb-4">
+      <section className="relative z-10 pt-12 pb-16 md:pt-20 md:pb-24 container-custom bg-cyber-grid">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Left Column: Heading, Text, CTA Buttons */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1"
+          >
+            {/* H1 Heading */}
+            <motion.h1 
+              variants={itemVariants} 
+              className="text-[28px] xs:text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-[#0F172A] leading-tight"
+            >
+              Technology That <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#EA580C]">Takes You</span> <br />
+              to the Top
+            </motion.h1>
+  
+            {/* Subheading Description */}
+            <motion.p 
+              variants={itemVariants} 
+              className="text-gray-600 text-sm sm:text-base md:text-xl max-w-2xl lg:max-w-none font-light leading-relaxed px-2 lg:px-0"
+            >
+              {settings.companyName} is committed to developing robust, secure, and user-friendly software products. We engineer platforms that empower millions of users worldwide.
+            </motion.p>
+  
+            {/* CTA Buttons */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-4 px-4 lg:px-0 w-full max-w-md mx-auto lg:mx-0 sm:max-w-none">
+              <Link
+                to="/apps"
+                className="flex items-center space-x-2 w-full sm:w-auto justify-center text-base font-bold text-white bg-[#F97316] hover:bg-[#EA580C] hover:scale-[1.02] active:scale-[0.98] px-8 py-3.5 rounded-xl transition-all duration-300 shadow-[0_4px_14px_rgba(249,115,22,0.25)]"
+              >
+                <span>Explore Apps</span>
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+              <Link
+                to="/about"
+                className="flex items-center justify-center w-full sm:w-auto text-base font-semibold text-[#0F172A] hover:bg-gray-100/50 hover:scale-[1.02] active:scale-[0.98] border border-slate-200 px-8 py-3.5 rounded-xl transition-all duration-300"
+              >
+                <span>Learn More</span>
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Column: Logo Brand Emblem */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center order-1 lg:order-2"
+          >
             <div 
-              style={{ width: '35rem', maxWidth: '90%' }}
-              className="relative aspect-[3.5/1] overflow-hidden flex items-center justify-center filter drop-shadow-[0_4px_12px_rgba(15,23,42,0.04)] transition-all duration-500 hover:scale-105"
+              className="relative w-full max-w-[280px] sm:max-w-[420px] md:max-w-[500px] aspect-[3.5/1] overflow-hidden flex items-center justify-center filter drop-shadow-[0_4px_12px_rgba(15,23,42,0.04)] transition-all duration-500 hover:scale-105"
             >
               <img 
                 src={settings.logoUrl || '/logo.png'} 
                 alt="GoTop Logo" 
-                className="absolute w-full h-full object-contain"
+                className="w-full h-full object-contain"
               />
             </div>
           </motion.div>
- 
-          {/* H1 Heading */}
-          <motion.h1 
-            variants={itemVariants} 
-            className="text-4xl md:text-6xl font-display font-extrabold tracking-tight text-[#0F172A] leading-tight"
-          >
-            Technology That <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#EA580C]">Takes You</span> <br />
-            to the Top
-          </motion.h1>
- 
-          {/* Subheading Description */}
-          <motion.p 
-            variants={itemVariants} 
-            className="text-gray-600 text-base md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
-          >
-            {settings.companyName} is committed to developing robust, secure, and user-friendly software products. We engineer platforms that empower millions of users worldwide.
-          </motion.p>
- 
-          {/* CTA Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-            <Link
-              to="/apps"
-              className="flex items-center space-x-2 w-full sm:w-auto justify-center text-base font-bold text-white bg-[#F97316] hover:bg-[#EA580C] hover:scale-[1.02] active:scale-[0.98] px-8 py-3.5 rounded-xl transition-all duration-300 shadow-[0_4px_14px_rgba(249,115,22,0.25)]"
-            >
-              <span>Explore Apps</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link
-              to="/about"
-              className="flex items-center justify-center w-full sm:w-auto text-base font-semibold text-[#0F172A] hover:bg-gray-100/50 hover:scale-[1.02] active:scale-[0.98] border border-slate-200 px-8 py-3.5 rounded-xl transition-all duration-300"
-            >
-              <span>Learn More</span>
-            </Link>
-          </motion.div>
-        </motion.div>
+          
+        </div>
       </section>
  
       {/* Statistics Section */}
       <section className="relative z-10 py-12 bg-white border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
               { label: 'Applications', value: '25+', icon: <Cpu className="h-5 w-5 text-[#F97316]" /> },
               { label: 'Total Downloads', value: '1M+', icon: <Download className="h-5 w-5 text-[#F97316]" /> },
@@ -169,7 +178,7 @@ const Home = () => {
       </section>
  
       {/* Featured Applications Section */}
-      <section className="relative z-10 py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative z-10 py-20 container-custom">
         <div className="text-center mb-16 space-y-3">
           <h2 className="text-3xl md:text-4xl font-display font-extrabold text-[#0F172A] tracking-tight">
             Featured Applications
@@ -243,7 +252,7 @@ const Home = () => {
  
       {/* Services Grid */}
       <section className="relative z-10 py-20 bg-white border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-custom">
           <div className="text-center mb-16 space-y-3">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-[#0F172A] tracking-tight">
               Our Capabilities
@@ -280,7 +289,7 @@ const Home = () => {
       </section>
  
       {/* Why Choose Us Section */}
-      <section className="relative z-10 py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative z-10 py-20 container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-[#0F172A] leading-tight">
@@ -320,7 +329,7 @@ const Home = () => {
  
       {/* Testimonials */}
       <section className="relative z-10 py-20 bg-white border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-custom">
           <div className="text-center mb-16 space-y-3">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-[#0F172A] tracking-tight">
               What Our Users Say
@@ -359,7 +368,7 @@ const Home = () => {
       </section>
  
       {/* Call To Action */}
-      <section className="relative z-10 py-24 max-w-5xl mx-auto px-4 text-center">
+      <section className="relative z-10 py-24 container-custom text-center">
         <div className="relative bg-[#0F172A] border border-slate-800 p-12 rounded-3xl overflow-hidden shadow-2xl">
           <div className="absolute -top-24 -left-24 w-64 h-64 bg-[#F97316]/10 rounded-full filter blur-[60px]" />
           <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-slate-900/40 rounded-full filter blur-[60px]" />

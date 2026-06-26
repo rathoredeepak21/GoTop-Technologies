@@ -133,42 +133,44 @@ const ManageCategories = () => {
         </div>
       ) : (
         <div className="glass-panel rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm">
-          <table className="w-full text-left border-collapse text-sm">
-            <thead className="bg-gray-50 text-gray-500 text-xs font-semibold uppercase border-b border-slate-200 tracking-wider">
-              <tr>
-                <th className="p-5">Category Name</th>
-                <th className="p-5">Slug</th>
-                <th className="p-5">Description</th>
-                <th className="p-5 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-gray-700">
-              {categories.map((cat) => (
-                <tr key={cat._id} className="hover:bg-gray-50 transition-colors">
-                  <td className="p-5 font-bold text-[#0F172A] flex items-center space-x-2.5">
-                    <Folder className="h-4.5 w-4.5 text-[#F97316]" />
-                    <span>{cat.name}</span>
-                  </td>
-                  <td className="p-5 font-mono text-xs text-gray-500">{cat.slug}</td>
-                  <td className="p-5 text-xs text-gray-600 max-w-sm leading-relaxed">{cat.description || 'No description provided.'}</td>
-                  <td className="p-5 text-right space-x-2">
-                    <button
-                      onClick={() => openEditModal(cat)}
-                      className="p-2 text-gray-500 hover:text-[#F97316] hover:bg-gray-100 rounded-lg transition-colors inline-block"
-                    >
-                      <Edit2 className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(cat._id, cat.name)}
-                      className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors inline-block"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-sm">
+              <thead className="bg-gray-50 text-gray-500 text-xs font-semibold uppercase border-b border-slate-200 tracking-wider">
+                <tr>
+                  <th className="p-5">Category Name</th>
+                  <th className="p-5">Slug</th>
+                  <th className="p-5">Description</th>
+                  <th className="p-5 text-right">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-gray-700">
+                {categories.map((cat) => (
+                  <tr key={cat._id} className="hover:bg-gray-50 transition-colors">
+                    <td className="p-5 font-bold text-[#0F172A] flex items-center space-x-2.5">
+                      <Folder className="h-4.5 w-4.5 text-[#F97316]" />
+                      <span>{cat.name}</span>
+                    </td>
+                    <td className="p-5 font-mono text-xs text-gray-500">{cat.slug}</td>
+                    <td className="p-5 text-xs text-gray-600 max-w-sm leading-relaxed">{cat.description || 'No description provided.'}</td>
+                    <td className="p-5 text-right space-x-2">
+                      <button
+                        onClick={() => openEditModal(cat)}
+                        className="p-2 text-gray-500 hover:text-[#F97316] hover:bg-gray-100 rounded-lg transition-colors inline-block"
+                      >
+                        <Edit2 className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(cat._id, cat.name)}
+                        className="p-2 text-gray-550 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors inline-block"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

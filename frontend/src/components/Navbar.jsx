@@ -108,57 +108,98 @@ const Navbar = () => {
               </Link>
             )}
             <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-[#0F172A] hover:bg-gray-100 focus:outline-none"
+              onClick={() => setIsOpen(true)}
+              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-500 hover:text-[#0F172A] hover:bg-gray-100/70 focus:outline-none transition-colors"
+              aria-label="Open navigation menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Menu className="h-6 w-6" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
-          <div className="px-2 pt-3 pb-4 space-y-2">
+      {/* Mobile Sliding Menu Drawer & Backdrop Overlay */}
+      {/* Backdrop */}
+      <div 
+        onClick={() => setIsOpen(false)}
+        className={`fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-40 md:hidden transition-all duration-300 ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      />
+
+      {/* Drawer */}
+      <div 
+        className={`fixed top-0 left-0 bottom-0 w-[280px] max-w-[80vw] bg-white z-50 shadow-2xl flex flex-col justify-between py-6 px-4 md:hidden transition-transform duration-300 ease-in-out will-change-transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="space-y-6">
+          {/* Header row in drawer */}
+          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+            <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center space-x-2.5">
+              <img src="/icon.png" alt={settings.companyName} className="h-8 w-auto object-contain" />
+              <span className="font-display font-extrabold text-lg text-[#0F172A]">GoTop</span>
+            </Link>
+            <button 
+              onClick={() => setIsOpen(false)} 
+              className="p-1 rounded-lg text-gray-500 hover:text-[#0F172A] hover:bg-gray-100"
+              aria-label="Close menu"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Navigation links inside drawer */}
+          <div className="flex flex-col space-y-1.5">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-semibold tracking-wide transition-all ${
+                className={`flex items-center px-4 py-3.5 rounded-xl text-sm font-semibold transition-all ${
                   isActive(link.path)
-                    ? 'text-[#F97316] bg-[#F97316]/5 border-l-4 border-[#F97316]'
+                    ? 'text-[#F97316] bg-[#F97316]/5 font-bold border-l-4 border-[#F97316]'
                     : 'text-gray-600 hover:text-[#0F172A] hover:bg-gray-50'
                 }`}
               >
                 {link.name}
               </Link>
             ))}
-            
-            <div className="border-t border-gray-100 my-3 pt-3 px-4 flex flex-col gap-3">
-              <Link
-                to="/downloads"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center space-x-2 w-full text-center text-sm font-bold text-white bg-[#F97316] hover:bg-[#EA580C] py-3 rounded-lg shadow-[0_4px_12px_rgba(249,115,22,0.2)]"
-              >
-                <Download className="h-4 w-4" />
-                <span>Download Center</span>
-              </Link>
-              {!isAuthenticated && (
-                <Link
-                  to="/admin/login"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center space-x-2 text-xs text-gray-400 hover:text-[#F97316] py-1"
-                >
-                  <ShieldAlert className="h-3 w-3" />
-                  <span>Admin Console</span>
-                </Link>
-              )}
-            </div>
           </div>
         </div>
-      )}
+
+        {/* Footer buttons inside drawer */}
+        <div className="border-t border-gray-100 pt-4 flex flex-col gap-3">
+          <Link
+            to="/downloads"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center justify-center space-x-2 w-full text-center text-sm font-bold text-white bg-[#F97316] hover:bg-[#EA580C] py-3.5 rounded-xl shadow-md transition-all active:scale-95"
+          >
+            <Download className="h-4 w-4" />
+            <span>Download Center</span>
+          </Link>
+
+          {isAuthenticated ? (
+            <Link
+              to="/admin/dashboard"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-center space-x-2 w-full text-center text-sm font-semibold text-[#0F172A] hover:text-[#F97316] border border-[#0F172A]/10 hover:border-[#F97316]/40 py-3 rounded-xl transition-all"
+            >
+              <LayoutDashboard className="h-4 w-4" />
+              <span>Console Dashboard</span>
+            </Link>
+          ) : (
+            <Link
+              to="/admin/login"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-center space-x-1.5 text-xs text-gray-400 hover:text-[#F97316] py-2"
+            >
+              <ShieldAlert className="h-3 w-3" />
+              <span>Admin Console</span>
+            </Link>
+          )}
+        </div>
+      </div>
     </nav>
   );
 };

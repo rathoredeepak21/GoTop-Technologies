@@ -4,6 +4,11 @@ const ParticleBg = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    // Disable animation on mobile/tablet devices to save CPU/GPU and battery
+    if (window.innerWidth < 768) {
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

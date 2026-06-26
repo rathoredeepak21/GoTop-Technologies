@@ -108,7 +108,7 @@ const Apps = () => {
       <div className="glow-circle-blue top-1/4 right-0" />
       <div className="glow-circle-indigo bottom-1/4 left-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container-custom relative z-10">
         
         {/* Page Header */}
         <div className="text-center mb-12 space-y-3">
@@ -120,149 +120,138 @@ const Apps = () => {
           <div className="neon-divider w-24 mx-auto pt-2" />
         </div>
 
-        {/* Search & Category Filter Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* Sidebar Filters */}
-          <div className="space-y-6 lg:col-span-1">
-            
-            {/* Search Bar */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search apps..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-800 transition-all placeholder-gray-400 shadow-sm"
-              />
-              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
-            </div>
-
-            {/* Category Select List */}
-            <div className="glass-panel p-6 rounded-2xl space-y-4">
-              <h3 className="text-[#0F172A] font-bold text-sm tracking-wider uppercase border-b border-gray-100 pb-2">
-                Categories
-              </h3>
-              <div className="flex flex-row flex-wrap lg:flex-col gap-2">
-                <button
-                  onClick={() => selectCategory('')}
-                  className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-all flex items-center justify-between ${
-                    activeCategory === ''
-                      ? 'bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/20 font-semibold'
-                      : 'text-gray-600 hover:text-[#0F172A] hover:bg-gray-100/50'
-                  }`}
-                >
-                  <span>All Categories</span>
-                  <Grid className="h-4 w-4 opacity-65" />
-                </button>
-
-                {categories.map((cat) => (
-                  <button
-                    key={cat._id}
-                    onClick={() => selectCategory(cat.slug)}
-                    className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-all flex items-center justify-between ${
-                      activeCategory === cat.slug
-                        ? 'bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/20 font-semibold'
-                        : 'text-gray-600 hover:text-[#0F172A] hover:bg-gray-100/50'
-                    }`}
-                  >
-                    <span>{cat.name}</span>
-                    <AppWindow className="h-4 w-4 opacity-50" />
-                  </button>
-                ))}
-              </div>
-            </div>
+        {/* Top Horizontal Search & Filter Bar */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 bg-white border border-slate-200 p-5 rounded-2xl shadow-sm">
+          {/* Search Bar */}
+          <div className="relative w-full lg:w-80">
+            <input
+              type="text"
+              placeholder="Search apps..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-800 transition-all placeholder-gray-400 shadow-sm"
+            />
+            <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
           </div>
 
-          {/* Apps Grid */}
-          <div className="lg:col-span-3">
-            {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[1, 2, 4, 5].map((n) => (
-                  <div key={n} className="glass-panel rounded-2xl h-64 animate-pulse" />
-                ))}
-              </div>
-            ) : apps.length === 0 ? (
-              <div className="glass-panel rounded-2xl p-12 text-center space-y-4">
-                <Cpu className="h-12 w-12 text-gray-500 mx-auto" />
-                <h3 className="text-[#0F172A] font-bold text-lg font-display">No Applications Found</h3>
-                <p className="text-gray-600 text-sm max-w-sm mx-auto">
-                  We couldn't find any applications matching your current filter parameters. Try checking your keywords or selecting another category.
-                </p>
-                <button
-                  onClick={() => { selectCategory(''); setSearchQuery(''); }}
-                  className="text-xs font-semibold text-[#F97316] underline hover:brightness-110"
-                >
-                  Clear filters & search
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {apps.map((app) => (
-                  <motion.div
-                    key={app._id}
-                    layout
-                    whileHover={{ y: -4 }}
-                    className="glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between"
-                  >
-                    <div>
-                      {/* Logo and Name */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center space-x-4">
-                          <img
-                            src={app.iconUrl || '/logo.png'}
-                            alt={app.name}
-                            className="h-14 w-14 rounded-xl object-contain bg-gray-50 p-2 border border-slate-100"
-                          />
-                          <div>
-                            <h3 className="text-[#0F172A] font-bold text-base font-display">{app.name}</h3>
-                            <span className="text-[10px] tracking-wide bg-[#F97316]/10 text-[#F97316] px-2.5 py-0.5 rounded-full font-semibold mt-0.5 inline-block">
-                              {app.category}
-                            </span>
-                          </div>
-                        </div>
-                        {/* Rating pill */}
-                        <div className="flex items-center space-x-1 bg-gray-50 px-2 py-1 rounded-lg border border-slate-200">
-                          <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
-                          <span className="text-[#0F172A] text-xs font-bold">{app.rating}</span>
-                        </div>
-                      </div>
-                      
-                      {/* Short Description */}
-                      <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
-                        {app.shortDescription || app.description}
-                      </p>
-                    </div>
+          {/* Category Horizontal Selector */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => selectCategory('')}
+              className={`px-4 py-2.5 rounded-xl text-sm transition-all flex items-center space-x-2 border ${
+                activeCategory === ''
+                  ? 'bg-[#F97316]/10 text-[#F97316] border-[#F97316]/30 font-semibold'
+                  : 'bg-gray-50 border-slate-250 text-gray-600 hover:text-[#0F172A] hover:bg-gray-100/50'
+              }`}
+            >
+              <span>All Categories</span>
+              <Grid className="h-4 w-4 opacity-75" />
+            </button>
 
-                    {/* Metadata and Actions */}
-                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
-                      <div className="text-[11px] text-gray-500 space-y-0.5">
-                        <div>Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
-                        <div>Version: <span className="text-gray-700 font-semibold font-mono">v{app.version}</span></div>
-                      </div>
-                      
-                      <div className="flex space-x-2">
-                        <Link
-                          to={`/apps/details/${app.slug}`}
-                          className="px-3.5 py-2 text-xs font-semibold text-[#0F172A] hover:bg-gray-100/50 border border-slate-200 rounded-lg transition-colors"
-                        >
-                          Details
-                        </Link>
-                        <Link
-                          to={`/apps/details/${app.slug}?action=download`}
-                          className="flex items-center space-x-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-[#F97316] hover:bg-[#EA580C] rounded-lg transition-all"
-                        >
-                          <Download className="h-3 w-3" />
-                          <span>Download</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            )}
+            {categories.map((cat) => (
+              <button
+                key={cat._id}
+                onClick={() => selectCategory(cat.slug)}
+                className={`px-4 py-2.5 rounded-xl text-sm transition-all flex items-center space-x-2 border ${
+                  activeCategory === cat.slug
+                    ? 'bg-[#F97316]/10 text-[#F97316] border-[#F97316]/30 font-semibold'
+                    : 'bg-gray-50 border-slate-250 text-gray-600 hover:text-[#0F172A] hover:bg-gray-100/50'
+                }`}
+              >
+                <span>{cat.name}</span>
+                <AppWindow className="h-4 w-4 opacity-50" />
+              </button>
+            ))}
           </div>
+        </div>
 
+        {/* Full-width Apps Catalog Grid */}
+        <div className="w-full">
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[1, 2, 3, 4].map((n) => (
+                <div key={n} className="glass-panel rounded-2xl h-64 animate-pulse" />
+              ))}
+            </div>
+          ) : apps.length === 0 ? (
+            <div className="glass-panel rounded-2xl p-12 text-center space-y-4">
+              <Cpu className="h-12 w-12 text-gray-500 mx-auto" />
+              <h3 className="text-[#0F172A] font-bold text-lg font-display">No Applications Found</h3>
+              <p className="text-gray-600 text-sm max-w-sm mx-auto">
+                We couldn't find any applications matching your current filter parameters. Try checking your keywords or selecting another category.
+              </p>
+              <button
+                onClick={() => { selectCategory(''); setSearchQuery(''); }}
+                className="text-xs font-semibold text-[#F97316] underline hover:brightness-110"
+              >
+                Clear filters & search
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {apps.map((app) => (
+                <motion.div
+                  key={app._id}
+                  layout
+                  whileHover={{ y: -4 }}
+                  className="glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Logo and Name */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          src={app.iconUrl || '/logo.png'}
+                          alt={app.name}
+                          className="h-14 w-14 rounded-xl object-contain bg-gray-50 p-2 border border-slate-100"
+                        />
+                        <div>
+                          <h3 className="text-[#0F172A] font-bold text-base font-display">{app.name}</h3>
+                          <span className="text-[10px] tracking-wide bg-[#F97316]/10 text-[#F97316] px-2.5 py-0.5 rounded-full font-semibold mt-0.5 inline-block">
+                            {app.category}
+                          </span>
+                        </div>
+                      </div>
+                      {/* Rating pill */}
+                      <div className="flex items-center space-x-1 bg-gray-50 px-2 py-1 rounded-lg border border-slate-200 shrink-0">
+                        <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
+                        <span className="text-[#0F172A] text-xs font-bold">{app.rating}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Short Description */}
+                    <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                      {app.shortDescription || app.description}
+                    </p>
+                  </div>
+
+                  {/* Metadata and Actions */}
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
+                    <div className="text-[11px] text-gray-500 space-y-0.5">
+                      <div>Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
+                      <div>Version: <span className="text-gray-700 font-semibold font-mono">v{app.version}</span></div>
+                    </div>
+                    
+                    <div className="flex space-x-2">
+                      <Link
+                        to={`/apps/details/${app.slug}`}
+                        className="px-3 py-2 text-xs font-semibold text-[#0F172A] hover:bg-gray-100/50 border border-slate-200 rounded-lg transition-colors"
+                      >
+                        Details
+                      </Link>
+                      <Link
+                        to={`/apps/details/${app.slug}?action=download`}
+                        className="flex items-center space-x-1.5 px-3 py-2 text-xs font-semibold text-white bg-[#F97316] hover:bg-[#EA580C] rounded-lg transition-all"
+                      >
+                        <Download className="h-3 w-3" />
+                        <span>Download</span>
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
 
       </div>

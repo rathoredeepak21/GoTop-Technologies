@@ -100,7 +100,7 @@ const Downloads = () => {
       <div className="glow-circle-blue top-1/4 right-0" />
       <div className="glow-circle-indigo bottom-1/4 left-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container-custom relative z-10">
         
         {/* Page Header */}
         <div className="text-center mb-12 space-y-3">
@@ -133,7 +133,7 @@ const Downloads = () => {
             </div>
           </div>
 
-          {/* Downloads Table */}
+          {/* Downloads List */}
           {loading ? (
             <div className="glass-panel rounded-2xl p-12 text-center bg-white border border-slate-200 shadow-sm">
               <RefreshCw className="h-6 w-6 text-[#F97316] animate-spin mx-auto mb-2" />
@@ -148,84 +148,145 @@ const Downloads = () => {
               </p>
             </div>
           ) : (
-            <div className="glass-panel rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse text-sm">
-                  <thead className="bg-gray-50 text-gray-500 text-xs font-semibold uppercase border-b border-slate-200 tracking-wider">
-                    <tr>
-                      <th className="p-5">Application</th>
-                      <th className="p-5">Category</th>
-                      <th className="p-5">Latest Version</th>
-                      <th className="p-5">File Size</th>
-                      <th className="p-5">Rating</th>
-                      <th className="p-5">Downloads</th>
-                      <th className="p-5 text-right">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100 text-gray-700">
-                    {filteredApps.map((app) => (
-                      <tr key={app._id} className="hover:bg-gray-50 transition-colors">
-                        
-                        {/* Application Icon and Name */}
-                        <td className="p-5">
-                          <div className="flex items-center space-x-3">
-                            <img
-                              src={app.iconUrl || '/logo.png'}
-                              alt={app.name}
-                              className="h-10 w-10 rounded-lg object-contain bg-gray-50 p-1.5 border border-slate-100"
-                            />
-                            <div>
-                              <Link to={`/apps/details/${app.slug}`} className="text-[#0F172A] font-bold hover:text-[#F97316] transition-colors font-display">
-                                {app.name}
-                              </Link>
-                              <div className="text-[10px] text-gray-500 font-medium">v{app.version}</div>
+            <>
+              {/* Desktop/Tablet Tabular View (hidden on Mobile) */}
+              <div className="hidden md:block glass-panel rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse text-sm">
+                    <thead className="bg-gray-50 text-gray-500 text-xs font-semibold uppercase border-b border-slate-200 tracking-wider">
+                      <tr>
+                        <th className="p-5">Application</th>
+                        <th className="p-5">Category</th>
+                        <th className="p-5">Latest Version</th>
+                        <th className="p-5">File Size</th>
+                        <th className="p-5">Rating</th>
+                        <th className="p-5">Downloads</th>
+                        <th className="p-5 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 text-gray-700">
+                      {filteredApps.map((app) => (
+                        <tr key={app._id} className="hover:bg-gray-50 transition-colors">
+                          
+                          {/* Application Icon and Name */}
+                          <td className="p-5">
+                            <div className="flex items-center space-x-3">
+                              <img
+                                src={app.iconUrl || '/logo.png'}
+                                alt={app.name}
+                                className="h-10 w-10 rounded-lg object-contain bg-gray-50 p-1.5 border border-slate-100"
+                              />
+                              <div>
+                                <Link to={`/apps/details/${app.slug}`} className="text-[#0F172A] font-bold hover:text-[#F97316] transition-colors font-display">
+                                  {app.name}
+                                </Link>
+                                <div className="text-[10px] text-gray-500 font-medium">v{app.version}</div>
+                              </div>
                             </div>
-                          </div>
-                        </td>
+                          </td>
 
-                        {/* Category */}
-                        <td className="p-5">
-                          <span className="text-[11px] bg-[#F97316]/10 text-[#F97316] px-2.5 py-0.5 rounded-full font-semibold">
+                          {/* Category */}
+                          <td className="p-5">
+                            <span className="text-[11px] bg-[#F97316]/10 text-[#F97316] px-2.5 py-0.5 rounded-full font-semibold">
+                              {app.category}
+                            </span>
+                          </td>
+
+                          {/* Version */}
+                          <td className="p-5 text-gray-500 font-mono text-xs">v{app.version}</td>
+
+                          {/* Size */}
+                          <td className="p-5 text-gray-500">{app.size || 'Unknown'}</td>
+
+                          {/* Rating */}
+                          <td className="p-5">
+                            <div className="flex items-center space-x-1">
+                              <Star className="h-3.5 w-3.5 text-yellow-500 fill-yellow-500" />
+                              <span className="text-[#0F172A] font-semibold">{app.rating}</span>
+                            </div>
+                          </td>
+
+                          {/* Download stats */}
+                          <td className="p-5 text-gray-600 text-xs font-mono">{(app.downloadCount || 0).toLocaleString()}</td>
+
+                          {/* Action download button */}
+                          <td className="p-5 text-right">
+                            <button
+                              onClick={() => triggerDownload(app)}
+                              disabled={downloadingId === app._id}
+                              className={`inline-flex items-center space-x-2 text-xs font-bold text-white bg-[#F97316] hover:bg-[#EA580C] shadow-sm px-4 py-2.5 rounded-lg transition-all ${
+                                downloadingId === app._id ? 'animate-pulse pointer-events-none opacity-80' : ''
+                              }`}
+                            >
+                              <Download className="h-3.5 w-3.5" />
+                              <span>{downloadingId === app._id ? 'Downloading...' : 'Get APK'}</span>
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Mobile Card-based Layout (hidden on Desktop/Tablet) */}
+              <div className="block md:hidden space-y-4">
+                {filteredApps.map((app) => (
+                  <div key={app._id} className="glass-panel p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+                    {/* Header: Logo, Name, Category */}
+                    <div className="flex items-center space-x-3.5">
+                      <img
+                        src={app.iconUrl || '/logo.png'}
+                        alt={app.name}
+                        className="h-12 w-12 rounded-xl object-contain bg-gray-50 p-2 border border-slate-100 shrink-0"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <Link to={`/apps/details/${app.slug}`} className="text-[#0F172A] font-bold hover:text-[#F97316] font-display text-base block truncate">
+                          {app.name}
+                        </Link>
+                        <div className="flex items-center gap-2 mt-1 flex-wrap">
+                          <span className="text-[10px] bg-[#F97316]/10 text-[#F97316] px-2 py-0.5 rounded-full font-semibold">
                             {app.category}
                           </span>
-                        </td>
+                          <span className="text-[10px] text-gray-500 font-mono">v{app.version}</span>
+                        </div>
+                      </div>
+                    </div>
 
-                        {/* Version */}
-                        <td className="p-5 text-gray-500 font-mono text-xs">v{app.version}</td>
+                    {/* Specifications detail block */}
+                    <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-gray-50 rounded-xl border border-slate-100 text-center text-xs">
+                      <div>
+                        <div className="text-gray-400 text-[9px] uppercase font-semibold">Size</div>
+                        <div className="text-[#0F172A] font-bold mt-0.5">{app.size || '15 MB'}</div>
+                      </div>
+                      <div>
+                        <div className="text-gray-400 text-[9px] uppercase font-semibold">Rating</div>
+                        <div className="text-[#0F172A] font-bold mt-0.5 flex items-center justify-center gap-0.5">
+                          <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
+                          <span>{app.rating}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-gray-400 text-[9px] uppercase font-semibold">Downloads</div>
+                        <div className="text-[#0F172A] font-bold mt-0.5 font-mono">{(app.downloadCount || 0).toLocaleString()}</div>
+                      </div>
+                    </div>
 
-                        {/* Size */}
-                        <td className="p-5 text-gray-500">{app.size || 'Unknown'}</td>
-
-                        {/* Rating */}
-                        <td className="p-5">
-                          <div className="flex items-center space-x-1">
-                            <Star className="h-3.5 w-3.5 text-yellow-500 fill-yellow-500" />
-                            <span className="text-[#0F172A] font-semibold">{app.rating}</span>
-                          </div>
-                        </td>
-
-                        {/* Download stats */}
-                        <td className="p-5 text-gray-600 text-xs font-mono">{(app.downloadCount || 0).toLocaleString()}</td>
-
-                        {/* Action download button */}
-                        <td className="p-5 text-right">
-                          <button
-                            onClick={() => triggerDownload(app)}
-                            disabled={downloadingId === app._id}
-                            className={`inline-flex items-center space-x-2 text-xs font-bold text-white bg-[#F97316] hover:bg-[#EA580C] shadow-sm px-4 py-2.5 rounded-lg transition-all ${
-                              downloadingId === app._id ? 'animate-pulse pointer-events-none opacity-80' : ''
-                            }`}
-                          >
-                            <Download className="h-3.5 w-3.5" />
-                            <span>{downloadingId === app._id ? 'Downloading...' : 'Get APK'}</span>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    {/* Download Button */}
+                    <button
+                      onClick={() => triggerDownload(app)}
+                      disabled={downloadingId === app._id}
+                      className={`flex items-center justify-center space-x-2 text-xs font-bold text-white bg-[#F97316] hover:bg-[#EA580C] shadow-sm w-full py-3.5 rounded-xl transition-all ${
+                        downloadingId === app._id ? 'animate-pulse pointer-events-none opacity-80' : ''
+                      }`}
+                    >
+                      <Download className="h-4 w-4" />
+                      <span>{downloadingId === app._id ? 'Downloading...' : 'Download APK Package'}</span>
+                    </button>
+                  </div>
+                ))}
               </div>
-            </div>
+            </>
           )}
 
           {/* Secure Download Guarantee Banner */}

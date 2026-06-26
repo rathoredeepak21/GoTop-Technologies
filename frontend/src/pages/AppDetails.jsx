@@ -32,6 +32,11 @@ const AppDetails = () => {
   const [isDraggingScreenshot, setIsDraggingScreenshot] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
 
+  // Pinch and Double tap states
+  const [initialPinchDistance, setInitialPinchDistance] = useState(0);
+  const [initialPinchScale, setInitialPinchScale] = useState(1);
+  const lastTouchTimeRef = useRef(0);
+
   const toggleZoom = (e) => {
     if (isZoomed) {
       setIsZoomed(false);
@@ -94,6 +99,63 @@ const AppDetails = () => {
       }
       setDragOffsetX(0);
     }
+  };
+
+  // Touch handlers for mobile swipe, pinch-to-zoom, and double-tap zoom
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 2) {
+      // Pinch to zoom started
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      setInitialPinchDistance(dist);
+      setInitialPinchScale(zoomScale);
+      setIsDraggingZoom(false);
+      setIsDraggingScreenshot(false);
+    } else if (e.touches.length === 1) {
+      // Check for double tap
+      const now = Date.now();
+      const delay = now - lastTouchTimeRef.current;
+      if (delay < 300) {
+        // Double tap zoom toggle
+        toggleZoom({
+          clientX: e.touches[0].clientX,
+          clientY: e.touches[0].clientY,
+          currentTarget: e.currentTarget
+        });
+        lastTouchTimeRef.current = 0; // reset
+        return;
+      }
+      lastTouchTimeRef.current = now;
+
+      // Regular touch drag start
+      handleDragStart(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (e.touches.length === 2 && initialPinchDistance > 0) {
+      // Pinching
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const factor = dist / initialPinchDistance;
+      const nextScale = Math.min(Math.max(initialPinchScale * factor, 1), 4);
+      setZoomScale(nextScale);
+      setIsZoomed(nextScale > 1);
+    } else if (e.touches.length === 1) {
+      // Regular touch drag/pan
+      handleDragMove(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (e.touches.length < 2) {
+      setInitialPinchDistance(0);
+    }
+    handleDragEnd();
   };
 
   const handleMouseDown = (e) => {
@@ -305,7 +367,7 @@ const AppDetails = () => {
       <div className="glow-circle-blue top-10 left-1/4" />
       <div className="glow-circle-indigo bottom-10 right-1/4" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container-custom max-w-6xl relative z-10">
         
         {/* Breadcrumb navigation */}
         <div className="flex items-center space-x-2 text-xs text-gray-500 mb-8">
@@ -572,9 +634,9 @@ const AppDetails = () => {
           onMouseMove={(e) => handleDragMove(e.clientX, e.clientY)}
           onMouseUp={handleDragEnd}
           onMouseLeave={handleDragEnd}
-          onTouchStart={(e) => handleDragStart(e.touches[0].clientX, e.touches[0].clientY)}
-          onTouchMove={(e) => handleDragMove(e.touches[0].clientX, e.touches[0].clientY)}
-          onTouchEnd={handleDragEnd}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           className="fixed inset-0 bg-slate-950/98 z-50 flex flex-col justify-between py-4 select-none animate-fade-in"
           role="dialog"
           aria-modal="true"

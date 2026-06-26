@@ -21,10 +21,10 @@ const Footer = () => {
       <div className="absolute bottom-0 left-10 w-96 h-96 bg-slate-900/10 rounded-full filter blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 text-center md:text-left">
           
           {/* Brand Info Column */}
-          <div className="space-y-4">
+          <div className="space-y-4 flex flex-col items-center md:items-start">
             <Link to="/" className="flex items-center space-x-3">
               <img 
                 src="/icon.png" 
@@ -35,11 +35,11 @@ const Footer = () => {
                 {settings.companyName}
               </span>
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xs text-center md:text-left">
               {settings.tagline || "Technology That Takes You to the Top"}
             </p>
             {/* Social Links */}
-            <div className="flex space-x-4 pt-2">
+            <div className="flex space-x-4 pt-2 justify-center md:justify-start">
               {settings.socialLinks && Object.entries(settings.socialLinks).map(([platform, url]) => {
                 if (!url) return null;
                 return (
@@ -59,11 +59,11 @@ const Footer = () => {
           </div>
 
           {/* Quick Links Column */}
-          <div>
-            <h3 className="text-white font-semibold text-sm tracking-widest uppercase mb-4 border-l-2 border-[#F97316] pl-2">
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-white font-semibold text-sm tracking-widest uppercase mb-4 border-l-0 md:border-l-2 border-[#F97316] pl-0 md:pl-2 text-center md:text-left">
               Quick Links
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 text-center md:text-left">
               {[
                 { name: 'Home', path: '/' },
                 { name: 'Apps', path: '/apps' },
@@ -81,11 +81,11 @@ const Footer = () => {
           </div>
 
           {/* Categories Column */}
-          <div>
-            <h3 className="text-white font-semibold text-sm tracking-widest uppercase mb-4 border-l-2 border-[#F97316] pl-2">
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-white font-semibold text-sm tracking-widest uppercase mb-4 border-l-0 md:border-l-2 border-[#F97316] pl-0 md:pl-2 text-center md:text-left">
               Categories
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 text-center md:text-left">
               {[
                 { name: 'Games', path: '/apps?category=games' },
                 { name: 'Tools', path: '/apps?category=tools' },
@@ -103,22 +103,22 @@ const Footer = () => {
           </div>
 
           {/* Contact Details Column */}
-          <div className="space-y-3">
-            <h3 className="text-white font-semibold text-sm tracking-widest uppercase mb-4 border-l-2 border-[#F97316] pl-2">
+          <div className="space-y-3 flex flex-col items-center md:items-start">
+            <h3 className="text-white font-semibold text-sm tracking-widest uppercase mb-4 border-l-0 md:border-l-2 border-[#F97316] pl-0 md:pl-2 text-center md:text-left">
               Stay Connected
             </h3>
-            <div className="flex items-start space-x-3 text-sm text-gray-400">
-              <Mail className="h-5 w-5 text-[#F97316] shrink-0 mt-0.5" />
+            <div className="flex items-center md:items-start space-x-3 text-sm text-gray-400 justify-center md:justify-start">
+              <Mail className="h-5 w-5 text-[#F97316] shrink-0" />
               <a href={`mailto:${settings.contactEmail}`} className="hover:text-[#F97316] transition-colors">
                 {settings.contactEmail}
               </a>
             </div>
-            <div className="flex items-start space-x-3 text-sm text-gray-400">
-              <Phone className="h-5 w-5 text-[#F97316] shrink-0 mt-0.5" />
+            <div className="flex items-center md:items-start space-x-3 text-sm text-gray-400 justify-center md:justify-start">
+              <Phone className="h-5 w-5 text-[#F97316] shrink-0" />
               <span>{settings.contactPhone}</span>
             </div>
-            <div className="flex items-start space-x-3 text-sm text-gray-400 leading-normal">
-              <MapPin className="h-5 w-5 text-[#F97316] shrink-0 mt-0.5" />
+            <div className="flex items-center md:items-start space-x-3 text-sm text-gray-400 leading-normal justify-center md:justify-start text-center md:text-left">
+              <MapPin className="h-5 w-5 text-[#F97316] shrink-0" />
               <span>{settings.address}</span>
             </div>
           </div>
@@ -127,9 +127,9 @@ const Footer = () => {
         <div className="neon-divider my-8" />
 
         {/* Bottom copyright and legal links */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 text-center md:text-left">
           <p>{settings.footerText || `© 2026 ${settings.companyName}. All rights reserved.`}</p>
-          <div className="flex space-x-6">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <Link to="/privacy" className="hover:text-[#F97316] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-[#F97316] transition-colors">Terms of Service</Link>
             <Link to="/dmca" className="hover:text-[#F97316] transition-colors">DMCA Compliance</Link>

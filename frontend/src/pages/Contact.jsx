@@ -43,7 +43,7 @@ const Contact = () => {
       <div className="glow-circle-blue top-1/4 right-10" />
       <div className="glow-circle-indigo bottom-1/4 left-10" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container-custom max-w-6xl relative z-10">
         
         {/* Page Header */}
         <div className="text-center mb-16 space-y-3">

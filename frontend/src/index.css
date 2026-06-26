@@ -3,17 +3,71 @@
 @tailwind utilities;
 
 @layer base {
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
   body {
     background-color: #F8FAFC;
     color: #111827;
     font-family: 'Manrope', sans-serif;
-    overflow-x: hidden;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
+
+  /* Responsive Headings Scaling */
+  h1 {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  @media (min-width: 360px) {
+    h1 {
+      font-size: 32px;
+    }
+  }
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 48px;
+    }
+  }
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 64px;
+    }
+  }
+
+  /* Base safety styles for images and buttons to prevent overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  button, .btn {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
+
+/* Custom Responsive Container */
+.container-custom {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 
 /* Custom Utilities for Premium Aesthetics */
 

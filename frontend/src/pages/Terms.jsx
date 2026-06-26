@@ -6,7 +6,7 @@ const Terms = () => {
   const { settings } = useSettings();
 
   return (
-    <div className="relative min-h-[75vh] py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-[75vh] py-16 md:py-24 container-custom max-w-4xl">
       {/* Background decoration */}
       <div className="glow-circle-indigo top-10 left-1/4" />
       
