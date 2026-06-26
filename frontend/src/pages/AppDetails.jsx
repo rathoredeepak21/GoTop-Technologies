@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { Download, Star, Calendar, Info, RefreshCw, ChevronRight, ChevronLeft, Check, Maximize2, X } from 'lucide-react';
+import { Download, Star, Calendar, Info, RefreshCw, ChevronRight, ChevronLeft, Check, Maximize2, X, ArrowLeft } from 'lucide-react';
 import { supabase } from '../config/supabase';
 
 const AppDetails = () => {
@@ -20,6 +20,81 @@ const AppDetails = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [dragMoved, setDragMoved] = useState(false);
   const [fullscreenIndex, setFullscreenIndex] = useState(null);
+  
+  // Immersive 3D Carousel & Zoom drag states
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomScale, setZoomScale] = useState(1);
+  const [zoomOffsetX, setZoomOffsetX] = useState(0);
+  const [zoomOffsetY, setZoomOffsetY] = useState(0);
+  const [isDraggingZoom, setIsDraggingZoom] = useState(false);
+  const [zoomDragStart, setZoomDragStart] = useState({ x: 0, y: 0 });
+  const [dragOffsetX, setDragOffsetX] = useState(0);
+  const [isDraggingScreenshot, setIsDraggingScreenshot] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+
+  const toggleZoom = (e) => {
+    if (isZoomed) {
+      setIsZoomed(false);
+      setZoomScale(1);
+      setZoomOffsetX(0);
+      setZoomOffsetY(0);
+    } else {
+      setIsZoomed(true);
+      setZoomScale(2.2);
+      if (e) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const clickX = e.clientX - rect.left - rect.width / 2;
+        const clickY = e.clientY - rect.top - rect.height / 2;
+        setZoomOffsetX(-clickX * 1.2);
+        setZoomOffsetY(-clickY * 1.2);
+      }
+    }
+  };
+
+  const handleDragStart = (clientX, clientY) => {
+    if (isZoomed) {
+      setIsDraggingZoom(true);
+      setZoomDragStart({ x: clientX - zoomOffsetX, y: clientY - zoomOffsetY });
+    } else {
+      setIsDraggingScreenshot(true);
+      setDragStartX(clientX);
+      setDragOffsetX(0);
+    }
+  };
+
+  const handleDragMove = (clientX, clientY) => {
+    if (isZoomed && isDraggingZoom) {
+      const offsetX = clientX - zoomDragStart.x;
+      const offsetY = clientY - zoomDragStart.y;
+      
+      const maxPanX = window.innerWidth * 0.5;
+      const maxPanY = window.innerHeight * 0.5;
+      const clampedX = Math.min(Math.max(offsetX, -maxPanX), maxPanX);
+      const clampedY = Math.min(Math.max(offsetY, -maxPanY), maxPanY);
+      
+      setZoomOffsetX(clampedX);
+      setZoomOffsetY(clampedY);
+    } else if (isDraggingScreenshot) {
+      const diffX = clientX - dragStartX;
+      setDragOffsetX(diffX);
+    }
+  };
+
+  const handleDragEnd = () => {
+    if (isDraggingZoom) {
+      setIsDraggingZoom(false);
+    }
+    if (isDraggingScreenshot) {
+      setIsDraggingScreenshot(false);
+      const threshold = window.innerWidth * 0.1 || 100;
+      if (dragOffsetX < -threshold) {
+        nextFullscreen();
+      } else if (dragOffsetX > threshold) {
+        prevFullscreen();
+      }
+      setDragOffsetX(0);
+    }
+  };
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -40,13 +115,13 @@ const AppDetails = () => {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // Drag speed modifier
+    const walk = (x - startX) * 1.5;
     sliderRef.current.scrollLeft = scrollLeft - walk;
     setDragMoved(true);
   };
 
   const handleScreenshotClick = (idx) => {
-    if (dragMoved) return; // Prevent fullscreen if user is dragging/scrolling
+    if (dragMoved) return;
     setFullscreenIndex(idx);
   };
 
@@ -58,18 +133,29 @@ const AppDetails = () => {
   };
 
   const prevFullscreen = (e) => {
-    e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     if (app && app.screenshots) {
       setFullscreenIndex((prev) => (prev === 0 ? app.screenshots.length - 1 : prev - 1));
     }
   };
 
   const nextFullscreen = (e) => {
-    e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     if (app && app.screenshots) {
       setFullscreenIndex((prev) => (prev === app.screenshots.length - 1 ? 0 : prev + 1));
     }
   };
+
+  // Reset zoom state on screenshot index change
+  useEffect(() => {
+    setIsZoomed(false);
+    setZoomScale(1);
+    setZoomOffsetX(0);
+    setZoomOffsetY(0);
+    setDragOffsetX(0);
+    setIsDraggingScreenshot(false);
+    setIsDraggingZoom(false);
+  }, [fullscreenIndex]);
 
   // Load app details
   useEffect(() => {
@@ -166,6 +252,24 @@ const AppDetails = () => {
     }
   };
 
+  // Keyboard listener for screenshot fullscreen gallery navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (fullscreenIndex === null) return;
+      if (e.key === 'Escape') {
+        setFullscreenIndex(null);
+      } else if (e.key === 'ArrowLeft') {
+        prevFullscreen(e);
+      } else if (e.key === 'ArrowRight') {
+        nextFullscreen(e);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [fullscreenIndex, app]);
 
   if (loading) {
     return (
@@ -457,68 +561,248 @@ const AppDetails = () => {
 
       {/* Fullscreen Screenshot Lightbox Modal */}
       {fullscreenIndex !== null && app.screenshots && (
-        <div className="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
-          
-          {/* Close button overlay */}
-          <button
-            onClick={() => setFullscreenIndex(null)}
-            className="absolute top-6 right-6 p-3 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:border-[#F97316] transition-all"
-            title="Close Gallery"
-          >
-            <X className="h-5 w-5" />
-          </button>
-
-          {/* Left Arrow overlay */}
-          <button
-            onClick={prevFullscreen}
-            className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:border-[#F97316] transition-all hidden sm:flex"
-            title="Previous Screenshot"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-
-          {/* Screenshot container */}
-          <div className="max-h-[80vh] max-w-[85vw] flex flex-col items-center justify-center relative select-none">
-            
-            {/* Gesture swipe touch helpers on mobile */}
+        <div 
+          onClick={(e) => {
+            // Only close if user clicked directly on background and wasn't dragging
+            if (Math.abs(dragOffsetX) < 8) {
+              setFullscreenIndex(null);
+            }
+          }}
+          onMouseDown={(e) => handleDragStart(e.clientX, e.clientY)}
+          onMouseMove={(e) => handleDragMove(e.clientX, e.clientY)}
+          onMouseUp={handleDragEnd}
+          onMouseLeave={handleDragEnd}
+          onTouchStart={(e) => handleDragStart(e.touches[0].clientX, e.touches[0].clientY)}
+          onTouchMove={(e) => handleDragMove(e.touches[0].clientX, e.touches[0].clientY)}
+          onTouchEnd={handleDragEnd}
+          className="fixed inset-0 bg-slate-950/98 z-50 flex flex-col justify-between py-4 select-none animate-fade-in"
+          role="dialog"
+          aria-modal="true"
+          aria-label="App Screenshots Viewer"
+        >
+          {/* Cinematic Background Blur */}
+          <div className="absolute inset-0 overflow-hidden -z-20 pointer-events-none select-none">
             <img
+              key={`bg-${fullscreenIndex}`}
               src={app.screenshots[fullscreenIndex]}
-              alt={`Fullscreen Screen ${fullscreenIndex + 1}`}
-              className="max-h-[75vh] max-w-[80vw] object-contain rounded-2xl border border-[#F97316]/20 shadow-lg animate-fade-in"
+              alt="Cinematic Background Blur"
+              className="w-full h-full object-cover filter blur-[48px] brightness-[0.22] scale-[1.08] transition-all duration-700 ease-out animate-pulse-slow"
             />
-            
-            {/* Index Counter */}
-            <div className="mt-4 text-xs text-gray-500 font-mono tracking-wider">
-              SCREENSHOT {fullscreenIndex + 1} OF {app.screenshots.length}
-            </div>
-
-            {/* Mobile Navigation controls */}
-            <div className="flex sm:hidden items-center space-x-6 mt-4">
-              <button
-                onClick={prevFullscreen}
-                className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-gray-300 hover:text-white"
-              >
-                Prev
-              </button>
-              <button
-                onClick={nextFullscreen}
-                className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-gray-300 hover:text-white"
-              >
-                Next
-              </button>
-            </div>
-
           </div>
 
-          {/* Right Arrow overlay */}
-          <button
-            onClick={nextFullscreen}
-            className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:border-[#F97316] transition-all hidden sm:flex"
-            title="Next Screenshot"
+          {/* Header Controls Bar */}
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="w-full flex items-center justify-between px-6 pb-4 border-b border-white/5 z-10 bg-slate-950/30 backdrop-blur-sm"
           >
-            <ChevronRight className="h-6 w-6" />
-          </button>
+            <button
+              onClick={() => setFullscreenIndex(null)}
+              className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors text-sm font-semibold group py-2"
+              aria-label="Back to details page"
+            >
+              <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+              <span>Back</span>
+            </button>
+            
+            <div className="flex flex-col items-center text-center">
+              <span className="text-white text-sm font-display font-extrabold tracking-wide">
+                {app.name}
+              </span>
+              <span className="text-gray-400 text-[10px] font-mono mt-0.5">
+                v{app.version}
+              </span>
+            </div>
 
+            <div className="flex items-center space-x-3">
+              {/* Zoom Action Button */}
+              <button
+                onClick={(e) => { e.stopPropagation(); toggleZoom(e); }}
+                className="flex items-center space-x-1.5 text-gray-400 hover:text-white transition-colors text-xs font-semibold bg-white/5 border border-white/10 hover:border-[#F97316] px-2.5 py-1.5 rounded-xl shadow-md"
+                title={isZoomed ? "Zoom Out" : "Zoom In"}
+              >
+                <Maximize2 className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">{isZoomed ? "100%" : "Zoom"}</span>
+              </button>
+
+              {/* Close Button */}
+              <button
+                onClick={() => setFullscreenIndex(null)}
+                className="flex items-center space-x-1.5 text-gray-400 hover:text-white transition-colors text-sm py-2"
+                title="Close (Esc)"
+                aria-label="Close viewer"
+              >
+                <span className="text-[10px] hidden sm:inline text-gray-500 font-mono bg-slate-900 px-1.5 py-0.5 rounded border border-white/10">ESC</span>
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Center Workspace (3D stacked coverflow layout) */}
+          <div 
+            className="flex-1 flex items-center justify-center relative overflow-hidden py-4 px-12"
+            style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}
+          >
+            {/* Left Nav Arrow Button */}
+            <button
+              type="button"
+              onClick={prevFullscreen}
+              className="absolute left-4 md:left-8 p-3 rounded-full bg-slate-900/60 border border-white/10 hover:border-[#F97316] hover:bg-slate-900 text-gray-300 hover:text-white transition-all shadow-md active:scale-95 z-20"
+              title="Previous Screenshot (Left Arrow)"
+              aria-label="Previous screenshot"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+
+            {/* Carousel Stack */}
+            <div className="relative w-full h-full flex items-center justify-center pointer-events-none" style={{ transformStyle: 'preserve-3d' }}>
+              {app.screenshots.map((shot, idx) => {
+                const len = app.screenshots.length;
+                let diff = idx - fullscreenIndex;
+                if (diff < -len / 2) diff += len;
+                if (diff > len / 2) diff -= len;
+
+                // Determine drag translation percentage
+                const dragPercent = Math.min(Math.max(dragOffsetX / (window.innerWidth * 0.4 || 300), -1), 1);
+
+                let style = {};
+                
+                if (isZoomed && diff === 0) {
+                  // Zoomed panning state
+                  style = {
+                    transform: `translateX(${zoomOffsetX}px) translateY(${zoomOffsetY}px) scale(${zoomScale})`,
+                    zIndex: 40,
+                    opacity: 1,
+                    cursor: isDraggingZoom ? 'grabbing' : 'zoom-out',
+                    transition: isDraggingZoom ? 'none' : 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                  };
+                } else {
+                  // 3D coverflow transition values based on continuous float index
+                  const position = diff - dragPercent;
+                  
+                  let translateX = position * 68; // side separation
+                  let translateZ = -Math.abs(position) * 160; // 3D depth
+                  let scale = 1 - Math.abs(position) * 0.16; // scale side items
+                  let rotateY = position * -24; // Y rotation angle
+                  let opacity = 1 - Math.abs(position) * 0.5; // fade side items
+                  let zIndex = 30 - Math.abs(position) * 10;
+                  
+                  // Clamp bounds
+                  opacity = Math.max(0, Math.min(1, opacity));
+                  scale = Math.max(0.4, Math.min(1.2, scale));
+                  
+                  style = {
+                    transform: `translateX(${translateX}%) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+                    opacity: opacity,
+                    zIndex: Math.round(zIndex),
+                    transition: isDraggingScreenshot 
+                      ? 'none' 
+                      : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                  };
+                }
+
+                return (
+                  <img
+                    key={idx}
+                    src={shot}
+                    alt={`Screenshot ${idx + 1}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (diff === -1) {
+                        prevFullscreen();
+                      } else if (diff === 1) {
+                        nextFullscreen();
+                      }
+                    }}
+                    onDoubleClick={(e) => {
+                      e.stopPropagation();
+                      if (diff === 0) toggleZoom(e);
+                    }}
+                    className={`absolute rounded-2xl border border-white/10 max-h-[58vh] md:max-h-[62vh] max-w-[70vw] md:max-w-[40vw] object-contain shadow-2xl pointer-events-auto select-none ${
+                      diff === 0 
+                        ? (isZoomed ? 'cursor-zoom-out shadow-black/80' : 'cursor-zoom-in shadow-black/60') 
+                        : 'cursor-pointer hover:opacity-85'
+                    }`}
+                    style={{
+                      ...style,
+                      transformStyle: 'preserve-3d',
+                      backfaceVisibility: 'hidden',
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Right Nav Arrow Button */}
+            <button
+              type="button"
+              onClick={nextFullscreen}
+              className="absolute right-4 md:right-8 p-3 rounded-full bg-slate-900/60 border border-white/10 hover:border-[#F97316] hover:bg-slate-900 text-gray-300 hover:text-white transition-all shadow-md active:scale-95 z-20"
+              title="Next Screenshot (Right Arrow)"
+              aria-label="Next screenshot"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Footer Controls & Thumbnails Strip */}
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="w-full flex flex-col items-center gap-3 pt-3 pb-2 border-t border-white/5 bg-slate-950/80 backdrop-blur-sm z-10"
+          >
+            {/* Screenshot Counter & Info */}
+            <div className="flex flex-col items-center">
+              <span className="text-gray-300 text-xs font-mono uppercase tracking-wider">
+                Screenshot {fullscreenIndex + 1} of {app.screenshots.length}
+              </span>
+              
+              {/* Double click helper */}
+              <span className="text-gray-500 text-[9px] mt-0.5 hidden sm:inline">
+                Double click or tap image to zoom • Drag to pan
+              </span>
+
+              {/* Animated Dots Indicator */}
+              <div className="flex items-center space-x-1.5 mt-2">
+                {app.screenshots.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setFullscreenIndex(idx)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      idx === fullscreenIndex ? 'w-4.5 bg-[#F97316]' : 'w-1.5 bg-white/25 hover:bg-white/40'
+                    }`}
+                    aria-label={`Go to screenshot ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div className="flex items-center space-x-3 overflow-x-auto max-w-[90vw] pb-1 px-4 scrollbar-none">
+              {app.screenshots.map((shot, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setFullscreenIndex(idx)}
+                  className={`w-14 h-24 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 bg-slate-900 shadow-md ${
+                    idx === fullscreenIndex 
+                      ? 'border-[#F97316] scale-105 shadow-[0_0_15px_rgba(249,115,22,0.45)]' 
+                      : 'border-white/10 opacity-40 hover:opacity-100 hover:scale-102'
+                  }`}
+                  aria-label={`Select screenshot ${idx + 1}`}
+                >
+                  <img 
+                    src={shot} 
+                    alt={`Thumbnail ${idx + 1}`} 
+                    className="w-full h-full object-cover pointer-events-none" 
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Hidden preloader for adjacent screenshots */}
+          <div className="hidden pointer-events-none">
+            <img src={app.screenshots[(fullscreenIndex - 1 + app.screenshots.length) % app.screenshots.length]} alt="preload-prev" />
+            <img src={app.screenshots[(fullscreenIndex + 1) % app.screenshots.length]} alt="preload-next" />
+          </div>
         </div>
       )}
 
