@@ -54,20 +54,20 @@ const Announcements = () => {
     switch (type) {
       case 'Launch':
         return {
-          bg: 'bg-green-500/10 text-green-400 border-green-500/20',
-          dot: 'bg-green-400 shadow-[0_0_8px_#4ade80]',
+          bg: 'bg-green-500/10 text-green-600 border-green-500/20',
+          dot: 'bg-green-500 shadow-sm',
           icon: <Play className="h-4 w-4" />
         };
       case 'Maintenance':
         return {
-          bg: 'bg-red-500/10 text-red-400 border-red-500/20',
-          dot: 'bg-red-400 shadow-[0_0_8px_#f87171]',
+          bg: 'bg-red-500/10 text-red-600 border-red-500/20',
+          dot: 'bg-red-500 shadow-sm',
           icon: <AlertTriangle className="h-4 w-4" />
         };
       default: // News
         return {
-          bg: 'bg-neon-blue/10 text-neon-blue border-neon-blue/20',
-          dot: 'bg-neon-blue shadow-[0_0_8px_#00d2ff]',
+          bg: 'bg-[#F97316]/10 text-[#F97316] border-[#F97316]/20',
+          dot: 'bg-[#F97316] shadow-sm',
           icon: <Tag className="h-4 w-4" />
         };
     }
@@ -83,24 +83,24 @@ const Announcements = () => {
         
         {/* Page Header */}
         <div className="text-center mb-12 space-y-3">
-          <span className="text-[11px] font-semibold text-neon-blue uppercase tracking-[0.2em]">Press & Logs</span>
-          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Announcements</h1>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
+          <span className="text-[11px] font-semibold text-[#F97316] uppercase tracking-[0.2em]">Press & Logs</span>
+          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-[#0F172A]">Announcements</h1>
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base">
             Keep track of latest product launches, system maintenance schedules, and brand news.
           </p>
           <div className="neon-divider w-24 mx-auto pt-2" />
         </div>
 
         {/* Filter Toggle Bar */}
-        <div className="flex justify-center space-x-2 md:space-x-4 mb-12 bg-space-dark/40 border border-space-border/60 p-1.5 rounded-xl max-w-md mx-auto">
+        <div className="flex justify-center space-x-2 md:space-x-4 mb-12 bg-white border border-slate-200 p-1.5 rounded-xl max-w-md mx-auto shadow-sm">
           {['All', 'Launch', 'Maintenance', 'News'].map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
               className={`px-4 py-2 rounded-lg text-xs font-semibold tracking-wide transition-all ${
                 activeFilter === filter
-                  ? 'bg-neon-blue text-space-darkest font-bold shadow-neon-glow'
-                  : 'text-gray-400 hover:text-white'
+                  ? 'bg-[#F97316] text-white font-bold shadow-sm'
+                  : 'text-gray-500 hover:text-[#0F172A]'
               }`}
             >
               {filter}
@@ -111,25 +111,25 @@ const Announcements = () => {
         {/* Timeline List */}
         {loading ? (
           <div className="text-center py-12">
-            <RefreshCw className="h-6 w-6 text-neon-blue animate-spin mx-auto mb-2" />
-            <span className="text-gray-400 text-sm">Synchronizing timelines...</span>
+            <RefreshCw className="h-6 w-6 text-[#F97316] animate-spin mx-auto mb-2" />
+            <span className="text-gray-600 text-sm">Synchronizing timelines...</span>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="glass-panel p-8 text-center rounded-2xl text-gray-500">
+          <div className="glass-panel p-8 text-center rounded-2xl text-gray-500 bg-white border border-slate-200 shadow-sm">
             No announcements logged under the category "{activeFilter}".
           </div>
         ) : (
-          <div className="relative border-l-2 border-space-border/60 pl-6 md:pl-8 space-y-12 max-w-3xl mx-auto">
+          <div className="relative border-l-2 border-slate-200 pl-6 md:pl-8 space-y-12 max-w-3xl mx-auto">
             {filtered.map((ann) => {
               const styles = getTypeStyle(ann.type);
               return (
                 <div key={ann._id} className="relative group">
                   
                   {/* Glowing Node Dot on the timeline border */}
-                  <span className={`absolute -left-[31px] md:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-space-darkest ${styles.dot}`} />
+                  <span className={`absolute -left-[31px] md:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-[#F8FAFC] ${styles.dot}`} />
                   
                   {/* Announcement Card */}
-                  <div className="glass-panel p-6 rounded-2xl space-y-4 hover:border-space-border transition-all duration-300">
+                  <div className="glass-panel p-6 rounded-2xl space-y-4 hover:border-[#F97316]/30 bg-white border border-slate-200 shadow-sm transition-all duration-300">
                     
                     {/* Header info */}
                     <div className="flex flex-wrap items-center justify-between gap-3">
@@ -145,10 +145,10 @@ const Announcements = () => {
 
                     {/* Content preview */}
                     <div className="space-y-2">
-                      <h3 className="text-white font-bold text-lg md:text-xl font-display group-hover:text-neon-blue transition-colors">
+                      <h3 className="text-[#0F172A] font-bold text-lg md:text-xl font-display group-hover:text-[#F97316] transition-colors">
                         {ann.title}
                       </h3>
-                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 font-light">
+                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 font-light">
                         {ann.content}
                       </p>
                     </div>
@@ -156,7 +156,7 @@ const Announcements = () => {
                     {/* Action button */}
                     <button
                       onClick={() => setSelectedAnn(ann)}
-                      className="text-xs font-semibold text-neon-blue hover:underline flex items-center space-x-1"
+                      className="text-xs font-semibold text-[#F97316] hover:underline flex items-center space-x-1"
                     >
                       <span>Read Full Details</span>
                       <span>→</span>
@@ -171,13 +171,13 @@ const Announcements = () => {
 
         {/* Read More Modal */}
         {selectedAnn && (
-          <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="glass-panel max-w-2xl w-full rounded-2xl border border-neon-blue/35 p-6 md:p-8 relative space-y-6">
+          <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="glass-panel max-w-2xl w-full rounded-2xl border border-slate-200 bg-white p-6 md:p-8 relative space-y-6 shadow-xl">
               
               {/* Close Button */}
               <button
                 onClick={() => setSelectedAnn(null)}
-                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white rounded-lg hover:bg-space-dark/80"
+                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-[#0F172A] rounded-lg hover:bg-gray-100"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -191,19 +191,19 @@ const Announcements = () => {
                   </div>
                   <span className="text-xs text-gray-500 font-mono">{selectedAnn.date}</span>
                 </div>
-                <h2 className="text-white font-extrabold text-2xl font-display leading-tight pr-8">
+                <h2 className="text-[#0F172A] font-extrabold text-2xl font-display leading-tight pr-8">
                   {selectedAnn.title}
                 </h2>
               </div>
 
               {/* Modal content body */}
-              <div className="text-gray-300 text-sm md:text-base leading-relaxed whitespace-pre-wrap font-light border-t border-space-border/40 pt-4 max-h-[380px] overflow-y-auto pr-2">
+              <div className="text-gray-700 text-sm md:text-base leading-relaxed whitespace-pre-wrap font-light border-t border-slate-100 pt-4 max-h-[380px] overflow-y-auto pr-2">
                 {selectedAnn.content}
               </div>
 
               {/* Footer info */}
               <div className="text-right text-[10px] text-gray-500 tracking-wider">
-                PUBLISHED BY NEXVORA PRESS CLUSTER
+                PUBLISHED BY GOTOP PRESS CLUSTER
               </div>
 
             </div>

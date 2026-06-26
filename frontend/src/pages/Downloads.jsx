@@ -104,10 +104,10 @@ const Downloads = () => {
         
         {/* Page Header */}
         <div className="text-center mb-12 space-y-3">
-          <span className="text-[11px] font-semibold text-neon-blue uppercase tracking-[0.2em]">Resource Center</span>
-          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Download Center</h1>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
-            Access secure, verified, and ad-free packages for all Nexvora applications and utility components.
+          <span className="text-[11px] font-semibold text-[#F97316] uppercase tracking-[0.2em]">Resource Center</span>
+          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-[#0F172A]">Download Center</h1>
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base">
+            Access secure, verified, and ad-free packages for all GoTop applications and utility components.
           </p>
           <div className="neon-divider w-24 mx-auto pt-2" />
         </div>
@@ -123,9 +123,9 @@ const Downloads = () => {
                 placeholder="Search download catalog..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-space-dark/80 border border-space-border/60 hover:border-space-border focus:border-neon-blue focus:outline-none rounded-xl py-3.5 pl-10 pr-4 text-sm text-gray-100 transition-all placeholder-gray-500"
+                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3.5 pl-10 pr-4 text-sm text-gray-800 transition-all placeholder-gray-400 shadow-sm"
               />
-              <Search className="absolute left-3.5 top-4 h-4 w-4 text-gray-500" />
+              <Search className="absolute left-3.5 top-4 h-4 w-4 text-gray-400" />
             </div>
             
             <div className="text-xs text-gray-500">
@@ -135,23 +135,23 @@ const Downloads = () => {
 
           {/* Downloads Table */}
           {loading ? (
-            <div className="glass-panel rounded-2xl p-12 text-center">
-              <RefreshCw className="h-6 w-6 text-neon-blue animate-spin mx-auto mb-2" />
-              <span className="text-gray-400 text-sm">Loading package manifest...</span>
+            <div className="glass-panel rounded-2xl p-12 text-center bg-white border border-slate-200 shadow-sm">
+              <RefreshCw className="h-6 w-6 text-[#F97316] animate-spin mx-auto mb-2" />
+              <span className="text-gray-600 text-sm">Loading package manifest...</span>
             </div>
           ) : filteredApps.length === 0 ? (
-            <div className="glass-panel rounded-2xl p-12 text-center space-y-4">
+            <div className="glass-panel rounded-2xl p-12 text-center space-y-4 bg-white border border-slate-200 shadow-sm">
               <Info className="h-10 w-10 text-gray-600 mx-auto" />
-              <h3 className="text-white font-bold text-lg font-display">No Packages Found</h3>
-              <p className="text-gray-400 text-sm max-w-xs mx-auto">
+              <h3 className="text-[#0F172A] font-bold text-lg font-display">No Packages Found</h3>
+              <p className="text-gray-600 text-sm max-w-xs mx-auto">
                 No apps matched your keywords. Try searching for "Spin", "Saver", or specific categories.
               </p>
             </div>
           ) : (
-            <div className="glass-panel rounded-2xl border border-space-border/60 overflow-hidden">
+            <div className="glass-panel rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse text-sm">
-                  <thead className="bg-space-dark/85 text-gray-400 text-xs font-semibold uppercase border-b border-space-border/60 tracking-wider">
+                  <thead className="bg-gray-50 text-gray-500 text-xs font-semibold uppercase border-b border-slate-200 tracking-wider">
                     <tr>
                       <th className="p-5">Application</th>
                       <th className="p-5">Category</th>
@@ -162,9 +162,9 @@ const Downloads = () => {
                       <th className="p-5 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-space-border/40 text-gray-300">
+                  <tbody className="divide-y divide-slate-100 text-gray-700">
                     {filteredApps.map((app) => (
-                      <tr key={app._id} className="hover:bg-space-dark/25 transition-colors">
+                      <tr key={app._id} className="hover:bg-gray-50 transition-colors">
                         
                         {/* Application Icon and Name */}
                         <td className="p-5">
@@ -172,47 +172,47 @@ const Downloads = () => {
                             <img
                               src={app.iconUrl || '/logo.png'}
                               alt={app.name}
-                              className="h-10 w-10 rounded-lg object-contain bg-space-dark p-1.5 border border-space-border"
+                              className="h-10 w-10 rounded-lg object-contain bg-gray-50 p-1.5 border border-slate-100"
                             />
                             <div>
-                              <Link to={`/apps/details/${app.slug}`} className="text-white font-bold hover:text-neon-blue transition-colors font-display">
+                              <Link to={`/apps/details/${app.slug}`} className="text-[#0F172A] font-bold hover:text-[#F97316] transition-colors font-display">
                                 {app.name}
                               </Link>
-                              <div className="text-[10px] text-gray-500">v{app.version}</div>
+                              <div className="text-[10px] text-gray-500 font-medium">v{app.version}</div>
                             </div>
                           </div>
                         </td>
 
                         {/* Category */}
                         <td className="p-5">
-                          <span className="text-[11px] bg-neon-blue/10 text-neon-blue px-2.5 py-0.5 rounded-full font-medium">
+                          <span className="text-[11px] bg-[#F97316]/10 text-[#F97316] px-2.5 py-0.5 rounded-full font-semibold">
                             {app.category}
                           </span>
                         </td>
 
                         {/* Version */}
-                        <td className="p-5 text-gray-400 font-mono text-xs">v{app.version}</td>
+                        <td className="p-5 text-gray-500 font-mono text-xs">v{app.version}</td>
 
                         {/* Size */}
-                        <td className="p-5 text-gray-400">{app.size || 'Unknown'}</td>
+                        <td className="p-5 text-gray-500">{app.size || 'Unknown'}</td>
 
                         {/* Rating */}
                         <td className="p-5">
                           <div className="flex items-center space-x-1">
                             <Star className="h-3.5 w-3.5 text-yellow-500 fill-yellow-500" />
-                            <span className="text-gray-300 font-semibold">{app.rating}</span>
+                            <span className="text-[#0F172A] font-semibold">{app.rating}</span>
                           </div>
                         </td>
 
                         {/* Download stats */}
-                        <td className="p-5 text-gray-400 text-xs font-mono">{(app.downloadCount || 0).toLocaleString()}</td>
+                        <td className="p-5 text-gray-600 text-xs font-mono">{(app.downloadCount || 0).toLocaleString()}</td>
 
                         {/* Action download button */}
                         <td className="p-5 text-right">
                           <button
                             onClick={() => triggerDownload(app)}
                             disabled={downloadingId === app._id}
-                            className={`inline-flex items-center space-x-2 text-xs font-bold text-space-darkest bg-gradient-to-r from-neon-blue to-blue-500 hover:brightness-110 shadow-neon-glow px-4 py-2.5 rounded-lg transition-all ${
+                            className={`inline-flex items-center space-x-2 text-xs font-bold text-white bg-[#F97316] hover:bg-[#EA580C] shadow-sm px-4 py-2.5 rounded-lg transition-all ${
                               downloadingId === app._id ? 'animate-pulse pointer-events-none opacity-80' : ''
                             }`}
                           >
@@ -229,11 +229,11 @@ const Downloads = () => {
           )}
 
           {/* Secure Download Guarantee Banner */}
-          <div className="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 border-l-4 border-neon-blue">
+          <div className="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 border-l-4 border-[#F97316] bg-white border border-slate-200 shadow-sm">
             <div className="space-y-1">
-              <h3 className="text-white font-bold text-sm font-display">Security Verification Assured</h3>
-              <p className="text-gray-400 text-xs font-light max-w-2xl leading-normal">
-                Every application package listed in our Download Center is programmatically scanned for malware, telemetry trackers, and adware prior to publication. Nexvora guarantees 100% secure packages.
+              <h3 className="text-[#0F172A] font-bold text-sm font-display">Security Verification Assured</h3>
+              <p className="text-gray-600 text-xs font-light max-w-2xl leading-normal">
+                Every application package listed in our Download Center is programmatically scanned for malware, telemetry trackers, and adware prior to publication. GoTop guarantees 100% secure packages.
               </p>
             </div>
             <div className="text-[10px] text-gray-500 shrink-0 font-mono">

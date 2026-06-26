@@ -28,7 +28,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-space-darkest/70 border-b border-space-border/60 transition-all duration-300">
+    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 border-b border-[#E5E7EB] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -37,13 +37,13 @@ const Navbar = () => {
             <img 
               src="/icon.png" 
               alt={settings.companyName} 
-              className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300 filter drop-shadow-[0_0_8px_rgba(0,210,255,0.4)]"
+              className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             />
             <div className="flex flex-col">
-              <span className="font-display font-extrabold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-neon-blue uppercase">
+              <span className="font-display font-extrabold text-xl tracking-tight text-[#0F172A]">
                 {settings.companyName.split(' ')[0]}
               </span>
-              <span className="text-[10px] tracking-[0.25em] text-neon-blue font-semibold uppercase leading-none">
+              <span className="text-[9px] tracking-[0.2em] text-[#F97316] font-bold uppercase leading-none mt-0.5">
                 {settings.companyName.split(' ').slice(1).join(' ') || 'TECHNOLOGIES'}
               </span>
             </div>
@@ -55,16 +55,18 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative py-2 text-sm font-medium tracking-wide transition-colors duration-200 ${
+                className={`relative py-2 text-sm font-semibold tracking-wide transition-colors duration-300 group ${
                   isActive(link.path) 
-                    ? 'text-neon-blue' 
-                    : 'text-gray-400 hover:text-white'
+                    ? 'text-[#F97316]' 
+                    : 'text-gray-500 hover:text-[#0F172A]'
                 }`}
               >
-                {link.name}
-                {isActive(link.path) && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-neon-blue shadow-[0_0_8px_#00d2ff]" />
-                )}
+                <span>{link.name}</span>
+                <span className={`absolute bottom-0 left-0 h-[2px] bg-[#F97316] transition-all duration-300 ${
+                  isActive(link.path) 
+                    ? 'w-full shadow-[0_1px_6px_rgba(249,115,22,0.4)]' 
+                    : 'w-0 group-hover:w-full'
+                }`} />
               </Link>
             ))}
           </div>
@@ -74,7 +76,7 @@ const Navbar = () => {
             {isAuthenticated ? (
               <Link
                 to="/admin/dashboard"
-                className="flex items-center space-x-2 text-sm font-medium text-neon-blue hover:text-white border border-neon-blue/40 hover:border-neon-blue hover:shadow-neon-glow px-4 py-2 rounded-lg transition-all duration-300"
+                className="flex items-center space-x-2 text-sm font-semibold text-[#F97316] hover:text-white border border-[#F97316]/40 hover:bg-[#F97316] hover:scale-[1.02] active:scale-[0.98] px-4 py-2 rounded-lg transition-all duration-300"
               >
                 <LayoutDashboard className="h-4 w-4" />
                 <span>Console</span>
@@ -82,7 +84,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/admin/login"
-                className="p-2 text-gray-500 hover:text-neon-blue transition-colors duration-200"
+                className="p-2 text-gray-400 hover:text-[#F97316] hover:scale-110 transition-all duration-200"
                 title="Admin Control"
               >
                 <ShieldAlert className="h-4 w-4" />
@@ -91,7 +93,7 @@ const Navbar = () => {
             
             <Link
               to="/downloads"
-              className="flex items-center space-x-2 text-sm font-semibold text-space-darkest bg-gradient-to-r from-neon-blue to-blue-500 hover:brightness-110 shadow-[0_0_15px_rgba(0,210,255,0.4)] px-5 py-2.5 rounded-lg transition-all duration-300"
+              className="flex items-center space-x-2 text-sm font-bold text-white bg-[#F97316] hover:bg-[#EA580C] hover:scale-[1.02] active:scale-[0.98] px-5 py-2.5 rounded-lg transition-all duration-300 shadow-[0_4px_14px_rgba(249,115,22,0.2)]"
             >
               <Download className="h-4 w-4" />
               <span>Download Center</span>
@@ -101,13 +103,13 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-3">
             {isAuthenticated && (
-              <Link to="/admin/dashboard" className="p-2 text-neon-blue">
+              <Link to="/admin/dashboard" className="p-2 text-[#F97316]">
                 <LayoutDashboard className="h-5 w-5" />
               </Link>
             )}
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-space-dark/80 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-[#0F172A] hover:bg-gray-100 focus:outline-none"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -117,28 +119,28 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden glass-panel border-t border-space-border/60">
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
           <div className="px-2 pt-3 pb-4 space-y-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium tracking-wide transition-all ${
+                className={`block px-4 py-3 rounded-lg text-base font-semibold tracking-wide transition-all ${
                   isActive(link.path)
-                    ? 'text-neon-blue bg-neon-blue/10 border-l-4 border-neon-blue'
-                    : 'text-gray-300 hover:text-white hover:bg-space-dark/40'
+                    ? 'text-[#F97316] bg-[#F97316]/5 border-l-4 border-[#F97316]'
+                    : 'text-gray-600 hover:text-[#0F172A] hover:bg-gray-50'
                 }`}
               >
                 {link.name}
               </Link>
             ))}
             
-            <div className="border-t border-space-border/40 my-3 pt-3 px-4 flex flex-col gap-3">
+            <div className="border-t border-gray-100 my-3 pt-3 px-4 flex flex-col gap-3">
               <Link
                 to="/downloads"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center space-x-2 w-full text-center text-sm font-semibold text-space-darkest bg-gradient-to-r from-neon-blue to-blue-500 py-3 rounded-lg shadow-neon-glow"
+                className="flex items-center justify-center space-x-2 w-full text-center text-sm font-bold text-white bg-[#F97316] hover:bg-[#EA580C] py-3 rounded-lg shadow-[0_4px_12px_rgba(249,115,22,0.2)]"
               >
                 <Download className="h-4 w-4" />
                 <span>Download Center</span>
@@ -147,7 +149,7 @@ const Navbar = () => {
                 <Link
                   to="/admin/login"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center space-x-2 text-xs text-gray-500 hover:text-neon-blue py-1"
+                  className="flex items-center justify-center space-x-2 text-xs text-gray-400 hover:text-[#F97316] py-1"
                 >
                   <ShieldAlert className="h-3 w-3" />
                   <span>Admin Console</span>

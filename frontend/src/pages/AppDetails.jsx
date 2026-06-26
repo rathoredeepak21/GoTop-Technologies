@@ -171,8 +171,8 @@ const AppDetails = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center space-y-4">
-          <RefreshCw className="h-8 w-8 text-neon-blue animate-spin" />
-          <span className="text-gray-400 text-sm">Loading application properties...</span>
+          <RefreshCw className="h-8 w-8 text-[#F97316] animate-spin" />
+          <span className="text-gray-600 text-sm">Loading application properties...</span>
         </div>
       </div>
     );
@@ -181,13 +181,13 @@ const AppDetails = () => {
   if (error || !app) {
     return (
       <div className="min-h-screen flex items-center justify-center py-20">
-        <div className="glass-panel max-w-md p-8 rounded-2xl text-center space-y-4">
+        <div className="glass-panel max-w-md p-8 rounded-2xl text-center space-y-4 bg-white border border-slate-200">
           <Info className="h-10 w-10 text-red-500 mx-auto" />
-          <h2 className="text-white text-xl font-bold font-display">{error || 'An error occurred'}</h2>
-          <p className="text-gray-400 text-sm">
+          <h2 className="text-[#0F172A] text-xl font-bold font-display">{error || 'An error occurred'}</h2>
+          <p className="text-gray-600 text-sm">
             We couldn't resolve the details for this application. It may have been deactivated or removed by the administrator.
           </p>
-          <Link to="/apps" className="text-neon-blue underline text-sm font-semibold inline-block">
+          <Link to="/apps" className="text-[#F97316] hover:brightness-110 underline text-sm font-semibold inline-block">
             Return to App Vault
           </Link>
         </div>
@@ -205,15 +205,15 @@ const AppDetails = () => {
         
         {/* Breadcrumb navigation */}
         <div className="flex items-center space-x-2 text-xs text-gray-500 mb-8">
-          <Link to="/" className="hover:text-neon-blue transition-colors">Home</Link>
+          <Link to="/" className="hover:text-[#F97316] transition-colors">Home</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link to="/apps" className="hover:text-neon-blue transition-colors">Apps</Link>
+          <Link to="/apps" className="hover:text-[#F97316] transition-colors">Apps</Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-gray-300 font-semibold">{app.name}</span>
+          <span className="text-[#0F172A] font-semibold">{app.name}</span>
         </div>
 
         {/* Product Identity Block */}
-        <section className="glass-panel p-6 md:p-8 rounded-3xl mb-12">
+        <section className="glass-panel p-6 md:p-8 rounded-3xl mb-12 bg-white border border-slate-200 shadow-sm">
           <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-8">
             
             {/* Logo & Details */}
@@ -221,38 +221,38 @@ const AppDetails = () => {
               <img
                 src={app.iconUrl || '/logo.png'}
                 alt={app.name}
-                className="h-24 w-24 md:h-32 md:w-32 rounded-3xl object-contain bg-space-dark p-3 border border-space-border/80 filter drop-shadow-[0_0_10px_rgba(0,210,255,0.2)]"
+                className="h-24 w-24 md:h-32 md:w-32 rounded-3xl object-contain bg-gray-50 p-3 border border-slate-100 filter drop-shadow-[0_4px_12px_rgba(15,23,42,0.04)]"
               />
               <div className="space-y-3">
                 <div className="space-y-1">
-                  <h1 className="text-3xl md:text-4xl font-display font-extrabold text-white">{app.name}</h1>
-                  <span className="text-xs tracking-wider bg-neon-blue/15 text-neon-blue px-3 py-1 rounded-full font-medium inline-block">
+                  <h1 className="text-3xl md:text-4xl font-display font-extrabold text-[#0F172A]">{app.name}</h1>
+                  <span className="text-xs tracking-wider bg-[#F97316]/10 text-[#F97316] px-3 py-1 rounded-full font-semibold inline-block">
                     {app.category}
                   </span>
                 </div>
                 
                 {/* Short stats */}
-                <div className="flex items-center justify-center md:justify-start space-x-6 text-xs text-gray-400">
+                <div className="flex items-center justify-center md:justify-start space-x-6 text-xs text-gray-500">
                   <div className="flex items-center space-x-1.5">
                     <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                    <span className="text-white font-bold text-sm">{app.rating}</span>
+                    <span className="text-[#0F172A] font-bold text-sm">{app.rating}</span>
                     <span>/ 5.0</span>
                   </div>
-                  <div>Downloads: <span className="text-gray-200 font-medium">{(app.downloadCount || 0).toLocaleString()}</span></div>
-                  <div>Size: <span className="text-gray-200 font-medium">{app.size || 'Unknown'}</span></div>
+                  <div>Downloads: <span className="text-gray-700 font-semibold">{(app.downloadCount || 0).toLocaleString()}</span></div>
+                  <div>Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
                 </div>
-                <p className="text-gray-400 text-sm font-light max-w-xl">
+                <p className="text-gray-600 text-sm font-light max-w-xl leading-relaxed">
                   {app.shortDescription || app.description}
                 </p>
               </div>
             </div>
 
             {/* Download Action Box */}
-            <div className="w-full md:w-auto shrink-0 flex flex-col items-center justify-center p-6 bg-space-dark/40 border border-space-border/60 rounded-2xl gap-3">
+            <div className="w-full md:w-auto shrink-0 flex flex-col items-center justify-center p-6 bg-gray-50 border border-slate-200 rounded-2xl gap-3">
               <button
                 onClick={() => triggerDownload(app)}
                 disabled={downloading}
-                className={`flex items-center justify-center space-x-3 w-full md:w-56 text-center text-sm font-semibold text-space-darkest bg-gradient-to-r from-neon-blue to-blue-500 hover:brightness-110 shadow-neon-strong py-4 rounded-xl transition-all duration-300 ${
+                className={`flex items-center justify-center space-x-3 w-full md:w-56 text-center text-sm font-bold text-white bg-[#F97316] hover:bg-[#EA580C] shadow-[0_4px_14px_rgba(249,115,22,0.25)] py-4 rounded-xl transition-all duration-300 ${
                   downloading ? 'animate-pulse pointer-events-none opacity-80' : ''
                 }`}
               >
@@ -271,7 +271,7 @@ const AppDetails = () => {
         {app.screenshots && app.screenshots.length > 0 && (
           <section className="mb-12 space-y-5 relative group/section select-none">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold font-display text-white border-l-2 border-neon-blue pl-2 flex items-center gap-2">
+              <h2 className="text-lg font-bold font-display text-[#0F172A] border-l-2 border-[#F97316] pl-2 flex items-center gap-2">
                 <span>Interface Screenshots</span>
                 <span className="text-[10px] text-gray-500 uppercase tracking-widest font-mono font-light hidden sm:inline">
                   (Swipe/Drag to scroll • Click to expand)
@@ -282,7 +282,7 @@ const AppDetails = () => {
                 <button
                   type="button"
                   onClick={() => scrollSlider('left')}
-                  className="p-2 rounded-lg bg-space-dark/80 border border-space-border/60 hover:border-neon-blue hover:text-neon-blue text-gray-400 hover:shadow-neon-glow transition-all"
+                  className="p-2 rounded-lg bg-white border border-slate-200 hover:border-[#F97316] hover:text-[#F97316] text-gray-500 transition-all shadow-sm"
                   title="Scroll Left"
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -290,7 +290,7 @@ const AppDetails = () => {
                 <button
                   type="button"
                   onClick={() => scrollSlider('right')}
-                  className="p-2 rounded-lg bg-space-dark/80 border border-space-border/60 hover:border-neon-blue hover:text-neon-blue text-gray-400 hover:shadow-neon-glow transition-all"
+                  className="p-2 rounded-lg bg-white border border-slate-200 hover:border-[#F97316] hover:text-[#F97316] text-gray-500 transition-all shadow-sm"
                   title="Scroll Right"
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -313,11 +313,11 @@ const AppDetails = () => {
                   <div
                     key={idx}
                     onClick={() => handleScreenshotClick(idx)}
-                    className="flex-shrink-0 snap-start rounded-2xl overflow-hidden border border-space-border/60 hover:border-neon-blue/60 transition-all duration-300 group/item relative bg-space-darker/40"
+                    className="flex-shrink-0 snap-start rounded-2xl overflow-hidden border border-slate-200 hover:border-[#F97316]/60 transition-all duration-300 group/item relative bg-gray-50"
                   >
                     {/* Hover Glow & Overlay Icon */}
-                    <div className="absolute inset-0 bg-space-darkest/40 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none z-10">
-                      <div className="p-3 rounded-full bg-space-darkest/80 border border-neon-blue/40 text-neon-blue shadow-neon-glow transform scale-90 group-hover/item:scale-100 transition-transform duration-300">
+                    <div className="absolute inset-0 bg-slate-900/10 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none z-10">
+                      <div className="p-3 rounded-full bg-white border border-[#F97316]/40 text-[#F97316] shadow-md transform scale-90 group-hover/item:scale-100 transition-transform duration-300">
                         <Maximize2 className="h-4.5 w-4.5" />
                       </div>
                     </div>
@@ -341,7 +341,7 @@ const AppDetails = () => {
           <div className="lg:col-span-2 space-y-8">
             
             {/* Tabs Headers */}
-            <div className="flex border-b border-space-border/60">
+            <div className="flex border-b border-slate-200">
               {[
                 { id: 'features', label: 'Features Catalog' },
                 { id: 'description', label: 'Overview' },
@@ -352,8 +352,8 @@ const AppDetails = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`py-3 px-6 text-sm font-semibold tracking-wide border-b-2 transition-all ${
                     activeTab === tab.id
-                      ? 'border-neon-blue text-neon-blue'
-                      : 'border-transparent text-gray-500 hover:text-gray-300'
+                      ? 'border-[#F97316] text-[#F97316]'
+                      : 'border-transparent text-gray-500 hover:text-[#0F172A]'
                   }`}
                 >
                   {tab.label}
@@ -370,24 +370,24 @@ const AppDetails = () => {
                   {app.features && app.features.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {app.features.map((feat, idx) => (
-                        <div key={idx} className="flex items-start space-x-3 p-4 bg-space-dark/30 border border-space-border/40 rounded-xl">
-                          <div className="p-1 rounded-full bg-neon-blue/10 border border-neon-blue/20 mt-0.5">
-                            <Check className="h-4.5 w-4.5 text-neon-blue" />
+                        <div key={idx} className="flex items-start space-x-3 p-4 bg-white border border-slate-200 rounded-xl shadow-sm">
+                          <div className="p-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/20 mt-0.5">
+                            <Check className="h-4.5 w-4.5 text-[#F97316]" />
                           </div>
-                          <span className="text-gray-300 text-sm font-light leading-relaxed">{feat}</span>
+                          <span className="text-gray-700 text-sm font-light leading-relaxed">{feat}</span>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-gray-400 text-sm italic">No features registered for this version.</p>
+                    <p className="text-gray-500 text-sm italic">No features registered for this version.</p>
                   )}
                 </div>
               )}
 
               {/* Description Tab */}
               {activeTab === 'description' && (
-                <div className="glass-panel p-6 rounded-2xl">
-                  <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap font-light">
+                <div className="glass-panel p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                  <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap font-light">
                     {app.description || 'No detailed overview description provided.'}
                   </p>
                 </div>
@@ -397,19 +397,19 @@ const AppDetails = () => {
               {activeTab === 'changelog' && (
                 <div className="space-y-6">
                   {app.changelog && app.changelog.length > 0 ? (
-                    <div className="border border-space-border/60 rounded-2xl overflow-hidden">
+                    <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
                       <table className="w-full text-left text-sm">
-                        <thead className="bg-space-dark/80 text-gray-400 text-xs uppercase border-b border-space-border/60">
+                        <thead className="bg-gray-50 text-gray-500 text-xs uppercase border-b border-slate-200">
                           <tr>
                             <th className="p-4">Version</th>
                             <th className="p-4">Release Date</th>
                             <th className="p-4">Release Notes</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-space-border/40 text-gray-300">
+                        <tbody className="divide-y divide-slate-100 text-gray-700">
                           {app.changelog.map((log, idx) => (
-                            <tr key={idx} className="hover:bg-space-dark/20 transition-colors">
-                              <td className="p-4 font-bold text-neon-blue">v{log.version}</td>
+                            <tr key={idx} className="hover:bg-gray-50 transition-colors">
+                              <td className="p-4 font-bold text-[#F97316]">v{log.version}</td>
                               <td className="p-4 text-xs">{log.date || 'Unknown'}</td>
                               <td className="p-4 text-xs font-light leading-relaxed max-w-sm">{log.notes || 'Performance enhancements.'}</td>
                             </tr>
@@ -418,7 +418,7 @@ const AppDetails = () => {
                       </table>
                     </div>
                   ) : (
-                    <p className="text-gray-400 text-sm italic">No update logs recorded.</p>
+                    <p className="text-gray-500 text-sm italic">No update logs recorded.</p>
                   )}
                 </div>
               )}
@@ -428,23 +428,23 @@ const AppDetails = () => {
 
           {/* Sidebar Specifications */}
           <div className="lg:col-span-1">
-            <div className="glass-panel p-6 rounded-2xl space-y-4">
-              <h3 className="text-white font-bold text-sm tracking-wider uppercase border-b border-space-border/40 pb-2 flex items-center space-x-2">
-                <Info className="h-4 w-4 text-neon-blue" />
+            <div className="glass-panel p-6 rounded-2xl space-y-4 bg-white border border-slate-200 shadow-sm">
+              <h3 className="text-[#0F172A] font-bold text-sm tracking-wider uppercase border-b border-slate-100 pb-2 flex items-center space-x-2">
+                <Info className="h-4 w-4 text-[#F97316]" />
                 <span>Specifications</span>
               </h3>
               
               <div className="space-y-4 text-xs">
                 {[
-                  { label: 'Published By', value: 'NEXVORA TECHNOLOGIES' },
+                  { label: 'Published By', value: 'GoTop Technologies' },
                   { label: 'Platform Support', value: app.categorySlug === 'tools' || app.categorySlug === 'entertainment' ? 'Android / APK' : 'Universal Mobile' },
                   { label: 'Latest Release', value: app.changelog && app.changelog[0] ? app.changelog[0].date : 'Recently' },
                   { label: 'FileSize', value: app.size || 'Unknown' },
                   { label: 'Content Safety', value: 'Everyone (PEGI 3)' }
                 ].map((spec, sIdx) => (
-                  <div key={sIdx} className="flex justify-between border-b border-space-border/40 pb-2">
+                  <div key={sIdx} className="flex justify-between border-b border-slate-150 pb-2">
                     <span className="text-gray-500">{spec.label}</span>
-                    <span className="text-gray-200 font-semibold">{spec.value}</span>
+                    <span className="text-gray-800 font-semibold">{spec.value}</span>
                   </div>
                 ))}
               </div>
@@ -457,12 +457,12 @@ const AppDetails = () => {
 
       {/* Fullscreen Screenshot Lightbox Modal */}
       {fullscreenIndex !== null && app.screenshots && (
-        <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
           
           {/* Close button overlay */}
           <button
             onClick={() => setFullscreenIndex(null)}
-            className="absolute top-6 right-6 p-3 rounded-xl bg-space-darker/80 border border-space-border/60 text-gray-400 hover:text-white hover:border-neon-blue hover:shadow-neon-glow transition-all"
+            className="absolute top-6 right-6 p-3 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:border-[#F97316] transition-all"
             title="Close Gallery"
           >
             <X className="h-5 w-5" />
@@ -471,7 +471,7 @@ const AppDetails = () => {
           {/* Left Arrow overlay */}
           <button
             onClick={prevFullscreen}
-            className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-space-darker/80 border border-space-border/60 text-gray-400 hover:text-white hover:border-neon-blue hover:shadow-neon-glow transition-all hidden sm:flex"
+            className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:border-[#F97316] transition-all hidden sm:flex"
             title="Previous Screenshot"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -484,7 +484,7 @@ const AppDetails = () => {
             <img
               src={app.screenshots[fullscreenIndex]}
               alt={`Fullscreen Screen ${fullscreenIndex + 1}`}
-              className="max-h-[75vh] max-w-[80vw] object-contain rounded-2xl border border-neon-blue/20 shadow-neon-strong animate-fade-in"
+              className="max-h-[75vh] max-w-[80vw] object-contain rounded-2xl border border-[#F97316]/20 shadow-lg animate-fade-in"
             />
             
             {/* Index Counter */}
@@ -496,13 +496,13 @@ const AppDetails = () => {
             <div className="flex sm:hidden items-center space-x-6 mt-4">
               <button
                 onClick={prevFullscreen}
-                className="px-4 py-2 rounded-lg bg-space-dark border border-space-border/60 text-gray-300 hover:text-white"
+                className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-gray-300 hover:text-white"
               >
                 Prev
               </button>
               <button
                 onClick={nextFullscreen}
-                className="px-4 py-2 rounded-lg bg-space-dark border border-space-border/60 text-gray-300 hover:text-white"
+                className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-gray-300 hover:text-white"
               >
                 Next
               </button>
@@ -513,7 +513,7 @@ const AppDetails = () => {
           {/* Right Arrow overlay */}
           <button
             onClick={nextFullscreen}
-            className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-space-darker/80 border border-space-border/60 text-gray-400 hover:text-white hover:border-neon-blue hover:shadow-neon-glow transition-all hidden sm:flex"
+            className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:border-[#F97316] transition-all hidden sm:flex"
             title="Next Screenshot"
           >
             <ChevronRight className="h-6 w-6" />

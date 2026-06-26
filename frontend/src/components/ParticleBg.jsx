@@ -28,10 +28,11 @@ const ParticleBg = () => {
       constructor(width, height) {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.35; // Slow velocity
-        this.vy = (Math.random() - 0.5) * 0.35;
-        this.radius = Math.random() * 1.5 + 0.5;
-        this.alpha = Math.random() * 0.5 + 0.2;
+        this.vx = (Math.random() - 0.5) * 0.25; // Slow velocity
+        this.vy = (Math.random() - 0.5) * 0.25;
+        this.radius = Math.random() * 2 + 0.8;
+        this.alpha = Math.random() * 0.15 + 0.05; // Fainter on light bg
+        this.color = Math.random() > 0.45 ? '249, 115, 22' : '15, 23, 42'; // Orange or Navy
       }
 
       update(width, height) {
@@ -46,7 +47,7 @@ const ParticleBg = () => {
       draw(c) {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        c.fillStyle = `rgba(0, 210, 255, ${this.alpha})`;
+        c.fillStyle = `rgba(${this.color}, ${this.alpha})`;
         c.fill();
       }
     }
@@ -65,12 +66,11 @@ const ParticleBg = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            const alpha = (1 - dist / maxDistance) * 0.12;
+            const alpha = (1 - dist / maxDistance) * 0.06; // Fainter line connectivity
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[j].x); // Wait, lines should connect particles
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 210, 255, ${alpha})`;
+            ctx.strokeStyle = `rgba(15, 23, 42, ${alpha})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }

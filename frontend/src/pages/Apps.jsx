@@ -112,10 +112,10 @@ const Apps = () => {
         
         {/* Page Header */}
         <div className="text-center mb-12 space-y-3">
-          <span className="text-[11px] font-semibold text-neon-blue uppercase tracking-[0.2em]">Application Vault</span>
-          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Our Applications</h1>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
-            Explore our collection of utilities, games, photography tools, and SaaS assistants built by Nexvora.
+          <span className="text-[11px] font-semibold text-[#F97316] uppercase tracking-[0.2em]">Application Vault</span>
+          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-[#0F172A]">Our Applications</h1>
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base">
+            Explore our collection of utilities, games, photography tools, and SaaS assistants engineered by GoTop Technologies.
           </p>
           <div className="neon-divider w-24 mx-auto pt-2" />
         </div>
@@ -133,14 +133,14 @@ const Apps = () => {
                 placeholder="Search apps..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-space-dark/80 border border-space-border/60 hover:border-space-border focus:border-neon-blue focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-100 transition-all placeholder-gray-500 shadow-inner"
+                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-800 transition-all placeholder-gray-400 shadow-sm"
               />
-              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-500" />
+              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
             </div>
 
             {/* Category Select List */}
             <div className="glass-panel p-6 rounded-2xl space-y-4">
-              <h3 className="text-white font-bold text-sm tracking-wider uppercase border-b border-space-border/40 pb-2">
+              <h3 className="text-[#0F172A] font-bold text-sm tracking-wider uppercase border-b border-gray-100 pb-2">
                 Categories
               </h3>
               <div className="flex flex-row flex-wrap lg:flex-col gap-2">
@@ -148,8 +148,8 @@ const Apps = () => {
                   onClick={() => selectCategory('')}
                   className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-all flex items-center justify-between ${
                     activeCategory === ''
-                      ? 'bg-neon-blue/15 text-neon-blue border border-neon-blue/30 font-semibold'
-                      : 'text-gray-400 hover:text-white hover:bg-space-dark/60'
+                      ? 'bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/20 font-semibold'
+                      : 'text-gray-600 hover:text-[#0F172A] hover:bg-gray-100/50'
                   }`}
                 >
                   <span>All Categories</span>
@@ -162,8 +162,8 @@ const Apps = () => {
                     onClick={() => selectCategory(cat.slug)}
                     className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-all flex items-center justify-between ${
                       activeCategory === cat.slug
-                        ? 'bg-neon-blue/15 text-neon-blue border border-neon-blue/30 font-semibold'
-                        : 'text-gray-400 hover:text-white hover:bg-space-dark/60'
+                        ? 'bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/20 font-semibold'
+                        : 'text-gray-600 hover:text-[#0F172A] hover:bg-gray-100/50'
                     }`}
                   >
                     <span>{cat.name}</span>
@@ -184,14 +184,14 @@ const Apps = () => {
               </div>
             ) : apps.length === 0 ? (
               <div className="glass-panel rounded-2xl p-12 text-center space-y-4">
-                <Cpu className="h-12 w-12 text-gray-600 mx-auto" />
-                <h3 className="text-white font-bold text-lg font-display">No Applications Found</h3>
-                <p className="text-gray-400 text-sm max-w-sm mx-auto">
+                <Cpu className="h-12 w-12 text-gray-500 mx-auto" />
+                <h3 className="text-[#0F172A] font-bold text-lg font-display">No Applications Found</h3>
+                <p className="text-gray-600 text-sm max-w-sm mx-auto">
                   We couldn't find any applications matching your current filter parameters. Try checking your keywords or selecting another category.
                 </p>
                 <button
                   onClick={() => { selectCategory(''); setSearchQuery(''); }}
-                  className="text-xs font-semibold text-neon-blue underline hover:brightness-110"
+                  className="text-xs font-semibold text-[#F97316] underline hover:brightness-110"
                 >
                   Clear filters & search
                 </button>
@@ -212,45 +212,45 @@ const Apps = () => {
                           <img
                             src={app.iconUrl || '/logo.png'}
                             alt={app.name}
-                            className="h-14 w-14 rounded-xl object-contain bg-space-dark p-2 border border-space-border"
+                            className="h-14 w-14 rounded-xl object-contain bg-gray-50 p-2 border border-slate-100"
                           />
                           <div>
-                            <h3 className="text-white font-bold text-base font-display">{app.name}</h3>
-                            <span className="text-[10px] tracking-wide bg-neon-blue/15 text-neon-blue px-2.5 py-0.5 rounded-full font-medium mt-0.5 inline-block">
+                            <h3 className="text-[#0F172A] font-bold text-base font-display">{app.name}</h3>
+                            <span className="text-[10px] tracking-wide bg-[#F97316]/10 text-[#F97316] px-2.5 py-0.5 rounded-full font-semibold mt-0.5 inline-block">
                               {app.category}
                             </span>
                           </div>
                         </div>
                         {/* Rating pill */}
-                        <div className="flex items-center space-x-1 bg-space-dark/80 px-2 py-1 rounded-lg border border-space-border/60">
+                        <div className="flex items-center space-x-1 bg-gray-50 px-2 py-1 rounded-lg border border-slate-200">
                           <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
-                          <span className="text-white text-xs font-bold">{app.rating}</span>
+                          <span className="text-[#0F172A] text-xs font-bold">{app.rating}</span>
                         </div>
                       </div>
                       
                       {/* Short Description */}
-                      <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                      <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
                         {app.shortDescription || app.description}
                       </p>
                     </div>
 
                     {/* Metadata and Actions */}
-                    <div className="pt-4 border-t border-space-border/40 flex items-center justify-between gap-4">
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
                       <div className="text-[11px] text-gray-500 space-y-0.5">
-                        <div>Size: <span className="text-gray-300 font-medium">{app.size || 'Unknown'}</span></div>
-                        <div>Version: <span className="text-gray-300 font-medium font-mono">v{app.version}</span></div>
+                        <div>Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
+                        <div>Version: <span className="text-gray-700 font-semibold font-mono">v{app.version}</span></div>
                       </div>
                       
                       <div className="flex space-x-2">
                         <Link
                           to={`/apps/details/${app.slug}`}
-                          className="px-3.5 py-2 text-xs font-semibold text-gray-300 hover:text-white bg-space-dark/80 hover:bg-space-dark border border-space-border hover:border-neon-blue rounded-lg transition-colors"
+                          className="px-3.5 py-2 text-xs font-semibold text-[#0F172A] hover:bg-gray-100/50 border border-slate-200 rounded-lg transition-colors"
                         >
                           Details
                         </Link>
                         <Link
                           to={`/apps/details/${app.slug}?action=download`}
-                          className="flex items-center space-x-1.5 px-3.5 py-2 text-xs font-semibold text-space-darkest bg-gradient-to-r from-neon-blue to-blue-500 hover:brightness-110 shadow-neon-glow rounded-lg transition-all"
+                          className="flex items-center space-x-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-[#F97316] hover:bg-[#EA580C] rounded-lg transition-all"
                         >
                           <Download className="h-3 w-3" />
                           <span>Download</span>

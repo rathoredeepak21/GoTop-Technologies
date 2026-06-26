@@ -152,8 +152,8 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-neon-blue"></div>
-        <span className="text-gray-400 text-sm">Aggregating telemetry datasets...</span>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#F97316]"></div>
+        <span className="text-gray-600 text-sm">Aggregating telemetry datasets...</span>
       </div>
     );
   }
@@ -194,10 +194,10 @@ const Dashboard = () => {
       {/* Top Header Row */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-display font-extrabold text-white">System Dashboard</h1>
-          <p className="text-gray-400 text-xs mt-1">Realtime overview of Nexvora Technologies telemetry indices.</p>
+          <h1 className="text-3xl font-display font-extrabold text-[#0F172A]">System Dashboard</h1>
+          <p className="text-gray-600 text-xs mt-1">Realtime overview of GoTop Technologies telemetry indices.</p>
         </div>
-        <div className="text-xs text-gray-500 font-mono bg-space-dark px-4 py-2 border border-space-border/60 rounded-xl">
+        <div className="text-xs text-gray-500 font-mono bg-white px-4 py-2 border border-slate-200 rounded-xl">
           CLUSTER STATS STATUS: ONLINE
         </div>
       </div>
@@ -205,24 +205,24 @@ const Dashboard = () => {
       {/* Metrics Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { label: 'Active Apps', value: metrics.totalApps, icon: <Cpu className="h-5 w-5 text-neon-blue" />, note: 'App catalog total' },
-          { label: 'Total Downloads', value: metrics.totalDownloads.toLocaleString(), icon: <Download className="h-5 w-5 text-neon-blue" />, note: 'Server package pulls' },
-          { label: 'Website Analytics', value: metrics.totalVisits.toLocaleString(), icon: <Users className="h-5 w-5 text-neon-blue" />, note: 'Logged page traffic' },
-          { label: 'Announcements', value: metrics.totalAnnouncements, icon: <Bell className="h-5 w-5 text-neon-blue" />, note: 'Active press bulletins' }
+          { label: 'Active Apps', value: metrics.totalApps, icon: <Cpu className="h-5 w-5 text-[#F97316]" />, note: 'App catalog total' },
+          { label: 'Total Downloads', value: metrics.totalDownloads.toLocaleString(), icon: <Download className="h-5 w-5 text-[#F97316]" />, note: 'Server package pulls' },
+          { label: 'Website Analytics', value: metrics.totalVisits.toLocaleString(), icon: <Users className="h-5 w-5 text-[#F97316]" />, note: 'Logged page traffic' },
+          { label: 'Announcements', value: metrics.totalAnnouncements, icon: <Bell className="h-5 w-5 text-[#F97316]" />, note: 'Active press bulletins' }
         ].map((m, idx) => (
-          <div key={idx} className="glass-panel p-5 rounded-2xl border border-space-border/40 relative overflow-hidden flex flex-col justify-between h-36">
+          <div key={idx} className="glass-panel p-5 rounded-2xl bg-white border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between h-36">
             <div className="flex justify-between items-start">
               <div>
                 <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">{m.label}</span>
-                <div className="text-2xl md:text-3xl font-display font-extrabold text-white mt-1 text-neon-glow">
+                <div className="text-2xl md:text-3xl font-display font-extrabold text-[#0F172A] mt-1">
                   {m.value}
                 </div>
               </div>
-              <div className="p-2.5 rounded-lg bg-neon-blue/15 border border-neon-blue/20">
+              <div className="p-2.5 rounded-lg bg-[#F97316]/10 border border-[#F97316]/20">
                 {m.icon}
               </div>
             </div>
-            <div className="text-[10px] text-gray-500 border-t border-space-border/20 pt-2 font-mono">
+            <div className="text-[10px] text-gray-500 border-t border-slate-100 pt-2 font-mono">
               {m.note}
             </div>
           </div>
@@ -233,13 +233,13 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Custom SVG Line Chart widget (2/3 size) */}
-        <div className="lg:col-span-2 glass-panel p-6 rounded-3xl border border-space-border/60 space-y-6">
+        <div className="lg:col-span-2 glass-panel p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <TrendingUp className="h-5 w-5 text-neon-blue" />
-              <h3 className="text-white font-bold font-display text-sm uppercase tracking-wider">Traffic Analysis</h3>
+              <TrendingUp className="h-5 w-5 text-[#F97316]" />
+              <h3 className="text-[#0F172A] font-bold font-display text-sm uppercase tracking-wider">Traffic Analysis</h3>
             </div>
-            <span className="text-[10px] text-neon-blue font-semibold bg-neon-blue/10 px-2 py-0.5 rounded-full uppercase">
+            <span className="text-[10px] text-[#F97316] font-semibold bg-[#F97316]/10 px-2 py-0.5 rounded-full uppercase">
               Monthly Page Visits
             </span>
           </div>
@@ -251,30 +251,29 @@ const Dashboard = () => {
               className="w-full h-auto overflow-visible select-none"
             >
               <defs>
-                {/* Neon blue gradient for shaded area */}
+                {/* Orange gradient for shaded area */}
                 <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#00d2ff" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#00d2ff" stopOpacity="0.00" />
+                  <stop offset="0%" stopColor="#F97316" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#F97316" stopOpacity="0.00" />
                 </linearGradient>
               </defs>
 
               {/* Grid Lines */}
-              <line x1={padding} y1={padding} x2={chartWidth - padding} y2={padding} stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-              <line x1={padding} y1={chartHeight / 2} x2={chartWidth - padding} y2={chartHeight / 2} stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-              <line x1={padding} y1={chartHeight - padding} x2={chartWidth - padding} y2={chartHeight - padding} stroke="rgba(255,255,255,0.05)" strokeWidth="1.5" />
+              <line x1={padding} y1={padding} x2={chartWidth - padding} y2={padding} stroke="rgba(15,23,42,0.03)" strokeWidth="1" />
+              <line x1={padding} y1={chartHeight / 2} x2={chartWidth - padding} y2={chartHeight / 2} stroke="rgba(15,23,42,0.03)" strokeWidth="1" />
+              <line x1={padding} y1={chartHeight - padding} x2={chartWidth - padding} y2={chartHeight - padding} stroke="rgba(15,23,42,0.05)" strokeWidth="1.5" />
 
               {/* Gradient Area path */}
               {areaD && <path d={areaD} fill="url(#chartGradient)" />}
 
-              {/* Neon Stroke path */}
+              {/* Orange Stroke path */}
               {pathD && (
                 <path 
                   d={pathD} 
                   fill="none" 
-                  stroke="#00d2ff" 
+                  stroke="#F97316" 
                   strokeWidth="2.5" 
                   strokeLinecap="round" 
-                  className="filter drop-shadow-[0_0_4px_rgba(0,210,255,0.4)]"
                 />
               )}
 
@@ -285,15 +284,15 @@ const Dashboard = () => {
                     cx={p.x} 
                     cy={p.y} 
                     r="4" 
-                    fill="#05070c" 
-                    stroke="#00d2ff" 
+                    fill="#ffffff" 
+                    stroke="#F97316" 
                     strokeWidth="2" 
                   />
                   {/* Tooltip labels */}
                   <text 
                     x={p.x} 
                     y={p.y - 8} 
-                    fill="#ffffff" 
+                    fill="#0F172A" 
                     fontSize="7" 
                     fontWeight="bold"
                     textAnchor="middle"
@@ -305,7 +304,7 @@ const Dashboard = () => {
                   <text 
                     x={p.x} 
                     y={chartHeight - 4} 
-                    fill="rgba(255,255,255,0.4)" 
+                    fill="rgba(15,23,42,0.4)" 
                     fontSize="7.5" 
                     textAnchor="middle"
                     className="font-mono uppercase"
@@ -319,28 +318,28 @@ const Dashboard = () => {
         </div>
 
         {/* Popular Apps Listing (1/3 size) */}
-        <div className="glass-panel p-6 rounded-3xl border border-space-border/60 space-y-4">
+        <div className="glass-panel p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
           <div className="flex items-center space-x-2">
-            <ArrowUpRight className="h-5 w-5 text-neon-blue" />
-            <h3 className="text-white font-bold font-display text-sm uppercase tracking-wider">Top Performing Apps</h3>
+            <ArrowUpRight className="h-5 w-5 text-[#F97316]" />
+            <h3 className="text-[#0F172A] font-bold font-display text-sm uppercase tracking-wider">Top Performing Apps</h3>
           </div>
           
           <div className="space-y-4 pt-2">
             {popularApps.map((app) => (
-              <div key={app._id} className="flex items-center justify-between p-3 bg-space-dark/30 border border-space-border/30 rounded-xl hover:border-space-border transition-colors">
+              <div key={app._id} className="flex items-center justify-between p-3 bg-gray-50 border border-slate-100 rounded-xl hover:border-slate-200 transition-colors">
                 <div className="flex items-center space-x-3 overflow-hidden">
                   <img
                     src={app.iconUrl || '/logo.png'}
                     alt={app.name}
-                    className="h-9 w-9 rounded-lg bg-space-dark p-1 border border-space-border shrink-0"
+                    className="h-9 w-9 rounded-lg bg-gray-50 p-1 border border-slate-200/80 shrink-0"
                   />
                   <div className="overflow-hidden">
-                    <h4 className="text-white text-xs font-bold font-display truncate">{app.name}</h4>
-                    <span className="text-[9px] text-gray-500 uppercase font-medium">{app.category}</span>
+                    <h4 className="text-[#0F172A] text-xs font-bold font-display truncate">{app.name}</h4>
+                    <span className="text-[9px] text-gray-500 uppercase font-semibold">{app.category}</span>
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="text-neon-blue text-xs font-bold font-mono">{(app.downloadCount || 0).toLocaleString()}</div>
+                  <div className="text-[#F97316] text-xs font-bold font-mono">{(app.downloadCount || 0).toLocaleString()}</div>
                   <span className="text-[8px] text-gray-500 uppercase tracking-wide">downloads</span>
                 </div>
               </div>
@@ -351,23 +350,23 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Activity Log */}
-      <section className="glass-panel p-6 rounded-3xl border border-space-border/60 space-y-6">
+      <section className="glass-panel p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6">
         <div className="flex items-center space-x-2">
-          <Activity className="h-5 w-5 text-neon-blue" />
-          <h3 className="text-white font-bold font-display text-sm uppercase tracking-wider">Recent Activity Logs</h3>
+          <Activity className="h-5 w-5 text-[#F97316]" />
+          <h3 className="text-[#0F172A] font-bold font-display text-sm uppercase tracking-wider">Recent Activity Logs</h3>
         </div>
         
-        <div className="relative border-l border-space-border/50 pl-6 space-y-5">
+        <div className="relative border-l border-slate-200 pl-6 space-y-5">
           {recentActivity.map((log) => (
             <div key={log.id} className="relative text-xs">
               {/* Timeline Indicator */}
               <span className={`absolute -left-[28.5px] top-1.5 h-1.5 w-1.5 rounded-full ${
                 log.type === 'download' 
-                  ? 'bg-neon-blue shadow-[0_0_4px_#00d2ff]' 
+                  ? 'bg-[#F97316] shadow-sm' 
                   : 'bg-gray-500'
               }`} />
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                <span className="text-gray-300 font-light leading-relaxed">{log.description}</span>
+                <span className="text-gray-700 font-light leading-relaxed">{log.description}</span>
                 <span className="text-[10px] text-gray-500 font-mono">{log.time}</span>
               </div>
             </div>

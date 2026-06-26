@@ -8,30 +8,30 @@ export default {
     extend: {
       colors: {
         space: {
-          darkest: '#05070c',
-          darker: '#080c14',
-          dark: '#0d1321',
-          card: 'rgba(13, 19, 33, 0.45)',
-          border: 'rgba(59, 130, 246, 0.15)',
+          darkest: '#F8FAFC',
+          darker: '#FFFFFF',
+          dark: '#F1F5F9',
+          card: 'rgba(255, 255, 255, 0.7)',
+          border: 'rgba(15, 23, 42, 0.08)',
         },
         neon: {
-          blue: '#00d2ff',
-          indigo: '#4f46e5',
-          accent: '#3b82f6',
+          blue: '#F97316',
+          indigo: '#0F172A',
+          accent: '#1E293B',
         }
       },
       boxShadow: {
-        'neon-glow': '0 0 20px rgba(0, 210, 255, 0.25)',
-        'neon-border': '0 0 10px rgba(59, 130, 246, 0.15)',
-        'neon-strong': '0 0 30px rgba(0, 210, 255, 0.45)',
+        'neon-glow': '0 10px 30px -10px rgba(249, 115, 22, 0.2), 0 1px 3px rgba(249, 115, 22, 0.1)',
+        'neon-border': '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 8px -1px rgba(15, 23, 42, 0.03)',
+        'neon-strong': '0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.02)',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Poppins', 'sans-serif'],
+        sans: ['Manrope', 'sans-serif'],
+        display: ['Plus Jakarta Sans', 'sans-serif'],
       },
       backgroundImage: {
-        'radial-neon': 'radial-gradient(circle at center, rgba(0, 210, 255, 0.15) 0%, transparent 70%)',
-        'grid-pattern': "linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
+        'radial-neon': 'radial-gradient(circle at center, rgba(249, 115, 22, 0.05) 0%, transparent 75%)',
+        'grid-pattern': "linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px)",
       }
     },
   },

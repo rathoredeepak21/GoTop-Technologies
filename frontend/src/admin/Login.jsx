@@ -54,24 +54,24 @@ const Login = () => {
         <div className="text-center">
           <img
             src={settings.logoUrl || '/logo.png'}
-            alt="Nexvora Logo"
-            className="h-16 w-auto mx-auto mb-4 filter drop-shadow-[0_0_8px_rgba(0,210,255,0.4)]"
+            alt="GoTop Logo"
+            className="h-16 w-auto mx-auto mb-4 filter drop-shadow-[0_4px_12px_rgba(15,23,42,0.04)]"
           />
-          <h2 className="text-3xl font-display font-extrabold text-white uppercase tracking-wider">
+          <h2 className="text-3xl font-display font-extrabold text-[#0F172A] uppercase tracking-wider">
             {settings.companyName.split(' ')[0]} Admin
           </h2>
-          <p className="mt-2 text-sm text-gray-400 font-light">
+          <p className="mt-2 text-sm text-gray-600 font-light">
             Authorized administrator console credentials required.
           </p>
         </div>
 
         {/* Card Panel */}
-        <div className="glass-panel p-8 rounded-3xl border border-neon-blue/20">
+        <div className="glass-panel p-8 rounded-3xl bg-white border border-slate-200 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-6">
             
             {/* Error Message banner */}
             {error && (
-              <div className="flex items-start space-x-2.5 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-xs text-red-400">
+              <div className="flex items-start space-x-2.5 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-xs text-red-600">
                 <AlertCircle className="h-4.5 w-4.5 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -81,33 +81,33 @@ const Login = () => {
               
               {/* Identifier input */}
               <div className="space-y-2">
-                <label className="text-gray-400 text-xs font-semibold uppercase tracking-wider">Email or Username</label>
+                <label className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Email or Username</label>
                 <div className="relative">
                   <input
                     type="text"
                     required
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
-                    className="w-full bg-space-dark/80 border border-space-border/60 focus:border-neon-blue focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-100 placeholder-gray-500"
-                    placeholder="admin@nexvora.com"
+                    className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-all"
+                    placeholder="admin@gotoptech.com"
                   />
-                  <Mail className="absolute left-3 top-3.5 h-4 w-4 text-gray-500" />
+                  <Mail className="absolute left-3 top-3.5 h-4 w-4 text-gray-400" />
                 </div>
               </div>
 
               {/* Password input */}
               <div className="space-y-2">
-                <label className="text-gray-400 text-xs font-semibold uppercase tracking-wider font-sans">Password</label>
+                <label className="text-gray-500 text-xs font-semibold uppercase tracking-wider font-sans">Password</label>
                 <div className="relative">
                   <input
                     type="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-space-dark/80 border border-space-border/60 focus:border-neon-blue focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-100 placeholder-gray-500"
+                    className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 pl-10 pr-4 text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-all"
                     placeholder="••••••••"
                   />
-                  <Lock className="absolute left-3 top-3.5 h-4 w-4 text-gray-500" />
+                  <Lock className="absolute left-3 top-3.5 h-4 w-4 text-gray-400" />
                 </div>
               </div>
 
@@ -117,7 +117,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center justify-center space-x-2 w-full text-center text-sm font-semibold text-space-darkest bg-gradient-to-r from-neon-blue to-blue-500 hover:brightness-110 shadow-neon-glow py-3.5 rounded-xl transition-all"
+              className="flex items-center justify-center space-x-2 w-full text-center text-sm font-semibold text-white bg-[#F97316] hover:bg-[#EA580C] shadow-sm py-3.5 rounded-xl transition-all"
             >
               {loading ? (
                 <>
@@ -132,7 +132,7 @@ const Login = () => {
           </form>
         </div>
 
-        <div className="text-center text-xs text-gray-600">
+        <div className="text-center text-xs text-gray-500">
           IP log event triggered upon access attempt.
         </div>
 

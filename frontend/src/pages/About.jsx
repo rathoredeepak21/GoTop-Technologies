@@ -18,7 +18,7 @@ const About = () => {
 
   // Safe destructuring with defaults
   const {
-    companyName = 'NEXVORA TECHNOLOGIES',
+    companyName = 'GoTop Technologies',
     aboutJourneyHeading = 'Our Journey',
     aboutJourneyP1 = '',
     aboutJourneyP2 = '',
@@ -31,7 +31,7 @@ const About = () => {
     aboutRoadmaps = []
   } = settings || {};
 
-  const brandName = companyName.split(' ')[0] || 'NEXVORA';
+  const brandName = companyName.split(' ')[0] || 'GoTop';
 
   return (
     <div className="relative overflow-hidden min-h-screen py-16">
@@ -43,9 +43,9 @@ const About = () => {
         
         {/* Page Header */}
         <div className="text-center mb-16 space-y-3">
-          <span className="text-[11px] font-semibold text-neon-blue uppercase tracking-[0.2em]">Our Identity</span>
-          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">About {brandName}</h1>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
+          <span className="text-[11px] font-semibold text-[#F97316] uppercase tracking-[0.2em]">Our Identity</span>
+          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-[#0F172A]">About {brandName}</h1>
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base">
             Learn about our founding story, mission parameters, and the engineering principles guiding our products.
           </p>
           <div className="neon-divider w-24 mx-auto pt-2" />
@@ -59,22 +59,22 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-white border-l-4 border-neon-blue pl-4">
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-[#0F172A] border-l-4 border-[#F97316] pl-4">
               {aboutJourneyHeading}
             </h2>
             {aboutJourneyP1 && (
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed font-light whitespace-pre-line">
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed font-light whitespace-pre-line">
                 {aboutJourneyP1}
               </p>
             )}
             {aboutJourneyP2 && (
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed font-light whitespace-pre-line">
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed font-light whitespace-pre-line">
                 {aboutJourneyP2}
               </p>
             )}
             {aboutJourneyQuote && (
-              <div className="p-4 rounded-xl bg-neon-blue/5 border border-neon-blue/25">
-                <span className="text-neon-blue font-semibold text-sm">"{aboutJourneyQuote}"</span>
+              <div className="p-4 rounded-xl bg-[#F97316]/5 border border-[#F97316]/25">
+                <span className="text-[#F97316] font-semibold text-sm">"{aboutJourneyQuote}"</span>
               </div>
             )}
           </motion.div>
@@ -86,11 +86,11 @@ const About = () => {
               transition={{ duration: 0.6 }}
               className="relative flex justify-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-neon-blue/20 to-purple-500/20 filter blur-3xl opacity-40 rounded-full" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#F97316]/10 to-indigo-500/10 filter blur-3xl opacity-40 rounded-full" />
               <img 
                 src={aboutJourneyImg} 
                 alt={`${brandName} office brainstorming`}
-                className="rounded-2xl border border-space-border/60 shadow-2xl object-cover max-h-[380px] w-full"
+                className="rounded-2xl border border-slate-200 shadow-2xl object-cover max-h-[380px] w-full"
               />
             </motion.div>
           )}
@@ -105,22 +105,22 @@ const About = () => {
         >
           {/* Mission Card */}
           <motion.div variants={cardVariants} className="glass-panel p-8 rounded-2xl space-y-4">
-            <div className="p-3 rounded-lg bg-neon-blue/10 border border-neon-blue/25 w-12 flex justify-center">
-              <Compass className="h-6 w-6 text-neon-blue" />
+            <div className="p-3 rounded-lg bg-[#F97316]/10 border border-[#F97316]/25 w-12 flex justify-center">
+              <Compass className="h-6 w-6 text-[#F97316]" />
             </div>
-            <h3 className="text-white font-bold text-xl font-display">Our Mission</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <h3 className="text-[#0F172A] font-bold text-xl font-display">Our Mission</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
               {aboutMissionText}
             </p>
           </motion.div>
 
           {/* Vision Card */}
           <motion.div variants={cardVariants} className="glass-panel p-8 rounded-2xl space-y-4">
-            <div className="p-3 rounded-lg bg-neon-blue/10 border border-neon-blue/25 w-12 flex justify-center">
-              <Eye className="h-6 w-6 text-neon-blue" />
+            <div className="p-3 rounded-lg bg-[#F97316]/10 border border-[#F97316]/25 w-12 flex justify-center">
+              <Eye className="h-6 w-6 text-[#F97316]" />
             </div>
-            <h3 className="text-white font-bold text-xl font-display">Our Vision</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <h3 className="text-[#0F172A] font-bold text-xl font-display">Our Vision</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
               {aboutVisionText}
             </p>
           </motion.div>
@@ -130,8 +130,8 @@ const About = () => {
         {aboutLeadership && aboutLeadership.length > 0 && (
           <section className="mb-24">
             <div className="text-center mb-16 space-y-3">
-              <h2 className="text-3xl font-display font-extrabold text-white">Our Leadership</h2>
-              <p className="text-gray-400 max-w-xl mx-auto text-sm">
+              <h2 className="text-3xl font-display font-extrabold text-[#0F172A]">Our Leadership</h2>
+              <p className="text-gray-600 max-w-xl mx-auto text-sm">
                 The creative minds directing {brandName} engineering and product development.
               </p>
               <div className="neon-divider w-16 mx-auto pt-2" />
@@ -145,9 +145,9 @@ const About = () => {
                     alt={member.name} 
                     className="w-full h-64 object-cover object-center group-hover:scale-102 transition-transform duration-300 filter brightness-95"
                   />
-                  <div className="p-6 text-center border-t border-space-border/40">
-                    <h4 className="text-white font-bold text-lg font-display">{member.name}</h4>
-                    <span className="text-neon-blue text-xs font-semibold">{member.role}</span>
+                  <div className="p-6 text-center border-t border-slate-100">
+                    <h4 className="text-[#0F172A] font-bold text-lg font-display">{member.name}</h4>
+                    <span className="text-[#F97316] text-xs font-semibold">{member.role}</span>
                   </div>
                 </div>
               ))}
@@ -157,23 +157,23 @@ const About = () => {
 
         {/* Future Goals */}
         {aboutRoadmaps && aboutRoadmaps.length > 0 && (
-          <section className="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-neon-blue/10 rounded-full filter blur-[40px]" />
+          <section className="relative bg-[#0F172A] border border-slate-800 p-8 md:p-12 rounded-3xl overflow-hidden shadow-2xl text-white">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#F97316]/10 rounded-full filter blur-[40px]" />
             
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
               <div className="space-y-4">
                 <h3 className="text-white font-extrabold text-2xl font-display">Future Roadmaps</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   {aboutRoadmapsDesc}
                 </p>
               </div>
               
               <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {aboutRoadmaps.map((goal, idx) => (
-                  <div key={idx} className="bg-space-dark/40 border border-space-border/60 p-5 rounded-xl space-y-2">
-                    <span className="text-neon-blue text-xs font-bold font-display">{goal.year}</span>
+                  <div key={idx} className="bg-slate-800/80 border border-slate-700 p-5 rounded-xl space-y-2">
+                    <span className="text-[#F97316] text-xs font-bold font-display">{goal.year}</span>
                     <h4 className="text-white font-semibold text-sm">{goal.title}</h4>
-                    <p className="text-gray-400 text-xs leading-normal">{goal.desc}</p>
+                    <p className="text-slate-300 text-xs leading-normal">{goal.desc}</p>
                   </div>
                 ))}
               </div>

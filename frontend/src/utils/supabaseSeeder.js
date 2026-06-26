@@ -7,26 +7,26 @@ export const seedSupabaseDatabase = async () => {
     // 1. Seed global settings (Upsert)
     const { error: settingsErr } = await supabase.from('settings').upsert({
       id: 'global',
-      company_name: 'NEXVORA TECHNOLOGIES',
-      tagline: "Building Tomorrow's Technology",
+      company_name: 'GoTop Technologies',
+      tagline: 'Technology That Takes You to the Top',
       logo_url: '/logo.png',
       favicon_url: '/icon.png',
-      theme: 'dark',
-      footer_text: '© 2026 NEXVORA TECHNOLOGIES. Building Tomorrow\'s Technology. All rights reserved.',
-      contact_email: 'support@nexvora.com',
-      contact_phone: '+1 (555) 308-2510',
-      address: 'Nexvora Tower, Floor 45, Tech Center, San Francisco, CA',
+      theme: 'light',
+      footer_text: '© 2026 GoTop Technologies. Technology That Takes You to the Top. All rights reserved.',
+      contact_email: 'support@gotoptech.com',
+      contact_phone: '+1 (555) 867-5309',
+      address: 'GoTop Headquarters, Floor 88, Innovation Way, Seattle, WA',
       social_links: {
-        facebook: 'https://facebook.com/nexvora',
-        twitter: 'https://twitter.com/nexvora',
-        linkedin: 'https://linkedin.com/company/nexvora',
-        github: 'https://github.com/nexvora',
-        telegram: 'https://t.me/nexvora'
+        facebook: 'https://facebook.com/gotoptech',
+        twitter: 'https://twitter.com/gotoptech',
+        linkedin: 'https://linkedin.com/company/gotoptech',
+        github: 'https://github.com/gotoptech',
+        telegram: 'https://t.me/gotoptech'
       },
       about_journey_heading: 'Our Journey',
-      about_journey_p1: 'Founded in 2026, NEXVORA TECHNOLOGIES emerged from a small lab of developers dedicated to refining user experience. We noticed a common issue: beautiful applications often lacked engineering speed, while heavy industrial tools lacked responsive styling.',
-      about_journey_p2: 'We set out to build an ecosystem that satisfies both requirements. By combining lightweight programming models with glassmorphism design layouts, Nexvora has become a trusted publisher of games, utilities, and productivity clients.',
-      about_journey_quote: "We don't just build code; we model digital futures.",
+      about_journey_p1: 'Founded in 2026, GoTop Technologies emerged from a small lab of developers dedicated to refining user experience. We noticed a common issue: beautiful applications often lacked engineering speed, while heavy industrial tools lacked responsive styling.',
+      about_journey_p2: 'We set out to build an ecosystem that satisfies both requirements. By combining lightweight programming models with premium light-themed design layouts, GoTop has become a trusted publisher of games, utilities, and productivity clients.',
+      about_journey_quote: "We don't just build code; we take your digital workflow to the top.",
       about_journey_img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800',
       about_mission_text: 'To engineer secure, resilient, and aesthetically stunning applications that solve daily user constraints. We prioritize code transparency, zero tracking, and performance speed across all operating systems.',
       about_vision_text: 'To establish a unified digital repository where users can download vetted, verified, and high-performance apps without worrying about adware, privacy tracking, or system bloat.',
@@ -35,10 +35,10 @@ export const seedSupabaseDatabase = async () => {
         { name: 'Sylas Sterling', role: 'Head of Engineering', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300' },
         { name: 'Aria Takahashi', role: 'Director of UX & Branding', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300' }
       ],
-      about_roadmaps_desc: 'As we expand, NEXVORA TECHNOLOGIES is targeting three key technical milestones over the next 18 months.',
+      about_roadmaps_desc: 'As we expand, GoTop Technologies is targeting three key technical milestones over the next 18 months.',
       about_roadmaps: [
         { year: 'Q4 2026', title: 'AI Automation Hub', desc: 'Deploying custom LLM adapters directly inside our client apps.' },
-        { year: 'Q2 2027', title: 'Nexvora Cloud Sync', desc: 'Enabling encrypted synchronization of gamer profiles and files.' },
+        { year: 'Q2 2027', title: 'GoTop Cloud Sync', desc: 'Enabling encrypted synchronization of gamer profiles and files.' },
         { year: 'Q4 2027', title: 'Cross-Play Engine', desc: 'Porting our arcade library to smart TVs and browser clients.' }
       ]
     });
@@ -86,7 +86,7 @@ export const seedSupabaseDatabase = async () => {
         category_id: catMap['Entertainment'],
         version: '2.1.0',
         logo_url: '/logo.png',
-        apk_download_url: 'https://github.com/nexvora/earn-spin/releases/download/v2.1.0/earn-spin-v2.1.0.apk',
+        apk_download_url: 'https://github.com/gotoptech/earn-spin/releases/download/v2.1.0/earn-spin-v2.1.0.apk',
         release_notes: 'Optimized leaderboard load speed by 40% and resolved scratch card reset bugs.',
         featured: true,
         trending: true,
@@ -116,7 +116,7 @@ export const seedSupabaseDatabase = async () => {
         category_id: catMap['Tools'],
         version: '1.3.0',
         logo_url: '/logo.png',
-        apk_download_url: 'https://github.com/nexvora/video-saver/releases/download/v1.3.0/video-saver-v1.3.0.apk',
+        apk_download_url: 'https://github.com/gotoptech/video-saver/releases/download/v1.3.0/video-saver-v1.3.0.apk',
         release_notes: 'Added picture-in-picture mode support and fixed media vault security hooks.',
         featured: false,
         trending: true,
@@ -145,7 +145,7 @@ export const seedSupabaseDatabase = async () => {
         category_id: catMap['Photography'],
         version: '1.0.8',
         logo_url: '/logo.png',
-        apk_download_url: 'https://github.com/nexvora/photo-gallery/releases/download/v1.0.8/photo-gallery-v1.0.8.apk',
+        apk_download_url: 'https://github.com/gotoptech/photo-gallery/releases/download/v1.0.8/photo-gallery-v1.0.8.apk',
         release_notes: 'Upgraded photo compression ratio, leading to 3x faster cloud sharing.',
         featured: false,
         trending: false,
@@ -169,12 +169,12 @@ export const seedSupabaseDatabase = async () => {
       {
         app_name: 'Game Zone',
         slug: 'game-zone',
-        description: 'Game Zone is Nexvora\'s premium game hub containing a collection of single-player arcade games like Space Blaster, Tetris, Brick Breaker, and Sudoku. Allows users to track multi-game stats and achievements on a single synchronized gamer profile.',
+        description: 'Game Zone is GoTop\'s premium game hub containing a collection of single-player arcade games like Space Blaster, Tetris, Brick Breaker, and Sudoku. Allows users to track multi-game stats and achievements on a single synchronized gamer profile.',
         short_description: 'All-in-one classic arcade gaming vault and stats log.',
         category_id: catMap['Games'],
         version: '3.0.2',
         logo_url: '/logo.png',
-        apk_download_url: 'https://github.com/nexvora/game-zone/releases/download/v3.0.2/game-zone-v3.0.2.apk',
+        apk_download_url: 'https://github.com/gotoptech/game-zone/releases/download/v3.0.2/game-zone-v3.0.2.apk',
         release_notes: 'Released the new "Space Blaster" game module and added full controller support.',
         featured: true,
         trending: false,
@@ -205,7 +205,7 @@ export const seedSupabaseDatabase = async () => {
     // 4. Seed announcements
     const announcementsData = [
       {
-        title: 'NEXVORA "Game Zone" version 3.0.2 is Now Live!',
+        title: 'GoTop "Game Zone" version 3.0.2 is Now Live!',
         content: 'We are thrilled to announce the official release of "Game Zone" version 3.0.2! This release introduces our brand new classic game "Space Blaster" with full 60 FPS neon particle support and integrated Bluetooth controller bindings. Update now from the Download Center to start matching high scores!',
         type: 'Launch',
         active: true

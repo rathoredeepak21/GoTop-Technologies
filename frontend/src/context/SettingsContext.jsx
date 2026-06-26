@@ -56,28 +56,28 @@ const mapToDb = (stateObj) => ({
 
 export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState({
-    companyName: 'NEXVORA TECHNOLOGIES',
-    tagline: "Building Tomorrow's Technology",
+    companyName: 'GoTop Technologies',
+    tagline: 'Technology That Takes You to the Top',
     logoUrl: '/logo.png',
     faviconUrl: '/icon.png',
-    theme: 'dark',
-    footerText: '© 2026 NEXVORA TECHNOLOGIES. All rights reserved.',
-    contactEmail: 'support@nexvora.com',
-    contactPhone: '+1 (555) 308-2510',
-    address: 'Nexvora Tower, Floor 45, Tech Center, San Francisco, CA',
+    theme: 'light',
+    footerText: '© 2026 GoTop Technologies. All rights reserved.',
+    contactEmail: 'support@gotoptech.com',
+    contactPhone: '+1 (555) 867-5309',
+    address: 'GoTop Headquarters, Floor 88, Innovation Way, Seattle, WA',
     socialLinks: {
-      facebook: 'https://facebook.com/nexvora',
-      twitter: 'https://twitter.com/nexvora',
-      linkedin: 'https://linkedin.com/company/nexvora',
-      github: 'https://github.com/nexvora',
-      telegram: 'https://t.me/nexvora'
+      facebook: 'https://facebook.com/gotoptech',
+      twitter: 'https://twitter.com/gotoptech',
+      linkedin: 'https://linkedin.com/company/gotoptech',
+      github: 'https://github.com/gotoptech',
+      telegram: 'https://t.me/gotoptech'
     },
     
     // About Page Settings Defaults
     aboutJourneyHeading: 'Our Journey',
-    aboutJourneyP1: 'Founded in 2026, NEXVORA TECHNOLOGIES emerged from a small lab of developers dedicated to refining user experience. We noticed a common issue: beautiful applications often lacked engineering speed, while heavy industrial tools lacked responsive styling.',
-    aboutJourneyP2: 'We set out to build an ecosystem that satisfies both requirements. By combining lightweight programming models with glassmorphism design layouts, Nexvora has become a trusted publisher of games, utilities, and productivity clients.',
-    aboutJourneyQuote: "We don't just build code; we model digital futures.",
+    aboutJourneyP1: 'Founded in 2026, GoTop Technologies emerged from a small lab of developers dedicated to refining user experience. We noticed a common issue: beautiful applications often lacked engineering speed, while heavy industrial tools lacked responsive styling.',
+    aboutJourneyP2: 'We set out to build an ecosystem that satisfies both requirements. By combining lightweight programming models with premium light-themed design layouts, GoTop has become a trusted publisher of games, utilities, and productivity clients.',
+    aboutJourneyQuote: "We don't just build code; we take your digital workflow to the top.",
     aboutJourneyImg: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800',
     aboutMissionText: 'To engineer secure, resilient, and aesthetically stunning applications that solve daily user constraints. We prioritize code transparency, zero tracking, and performance speed across all operating systems.',
     aboutVisionText: 'To establish a unified digital repository where users can download vetted, verified, and high-performance apps without worrying about adware, privacy tracking, or system bloat.',
@@ -86,10 +86,10 @@ export const SettingsProvider = ({ children }) => {
       { name: 'Sylas Sterling', role: 'Head of Engineering', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300' },
       { name: 'Aria Takahashi', role: 'Director of UX & Branding', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300' }
     ],
-    aboutRoadmapsDesc: 'As we expand, NEXVORA TECHNOLOGIES is targeting three key technical milestones over the next 18 months.',
+    aboutRoadmapsDesc: 'As we expand, GoTop Technologies is targeting three key technical milestones over the next 18 months.',
     aboutRoadmaps: [
       { year: 'Q4 2026', title: 'AI Automation Hub', desc: 'Deploying custom LLM adapters directly inside our client apps.' },
-      { year: 'Q2 2027', title: 'Nexvora Cloud Sync', desc: 'Enabling encrypted synchronization of gamer profiles and files.' },
+      { year: 'Q2 2027', title: 'GoTop Cloud Sync', desc: 'Enabling encrypted synchronization of gamer profiles and files.' },
       { year: 'Q4 2027', title: 'Cross-Play Engine', desc: 'Porting our arcade library to smart TVs and browser clients.' }
     ]
   });
@@ -104,7 +104,49 @@ export const SettingsProvider = ({ children }) => {
         .maybeSingle();
 
       if (data) {
-        setSettings(mapFromDb(data));
+        // Auto-migration check: If company name contains "NEXVORA", overwrite with rebranded defaults
+        if (data.company_name && data.company_name.toUpperCase().includes('NEXVORA')) {
+          const rebrandedSettings = {
+            companyName: 'GoTop Technologies',
+            tagline: 'Technology That Takes You to the Top',
+            logoUrl: '/logo.png',
+            faviconUrl: '/icon.png',
+            theme: 'light',
+            footerText: '© 2026 GoTop Technologies. All rights reserved.',
+            contactEmail: 'support@gotoptech.com',
+            contactPhone: '+1 (555) 867-5309',
+            address: 'GoTop Headquarters, Floor 88, Innovation Way, Seattle, WA',
+            socialLinks: {
+              facebook: 'https://facebook.com/gotoptech',
+              twitter: 'https://twitter.com/gotoptech',
+              linkedin: 'https://linkedin.com/company/gotoptech',
+              github: 'https://github.com/gotoptech',
+              telegram: 'https://t.me/gotoptech'
+            },
+            aboutJourneyHeading: 'Our Journey',
+            aboutJourneyP1: 'Founded in 2026, GoTop Technologies emerged from a small lab of developers dedicated to refining user experience. We noticed a common issue: beautiful applications often lacked engineering speed, while heavy industrial tools lacked responsive styling.',
+            aboutJourneyP2: 'We set out to build an ecosystem that satisfies both requirements. By combining lightweight programming models with premium light-themed design layouts, GoTop has become a trusted publisher of games, utilities, and productivity clients.',
+            aboutJourneyQuote: "We don't just build code; we take your digital workflow to the top.",
+            aboutJourneyImg: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800',
+            aboutMissionText: 'To engineer secure, resilient, and aesthetically stunning applications that solve daily user constraints. We prioritize code transparency, zero tracking, and performance speed across all operating systems.',
+            aboutVisionText: 'To establish a unified digital repository where users can download vetted, verified, and high-performance apps without worrying about adware, privacy tracking, or system bloat.',
+            aboutLeadership: [
+              { name: 'Dr. Evelyn Cross', role: 'Chief Executive Officer', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300' },
+              { name: 'Sylas Sterling', role: 'Head of Engineering', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300' },
+              { name: 'Aria Takahashi', role: 'Director of UX & Branding', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300' }
+            ],
+            aboutRoadmapsDesc: 'As we expand, GoTop Technologies is targeting three key technical milestones over the next 18 months.',
+            aboutRoadmaps: [
+              { year: 'Q4 2026', title: 'AI Automation Hub', desc: 'Deploying custom LLM adapters directly inside our client apps.' },
+              { year: 'Q2 2027', title: 'GoTop Cloud Sync', desc: 'Enabling encrypted synchronization of gamer profiles and files.' },
+              { year: 'Q4 2027', title: 'Cross-Play Engine', desc: 'Porting our arcade library to smart TVs and browser clients.' }
+            ]
+          };
+          await supabase.from('settings').upsert(mapToDb(rebrandedSettings));
+          setSettings(rebrandedSettings);
+        } else {
+          setSettings(mapFromDb(data));
+        }
       } else {
         // Self-heal: Write default branding parameters if missing in database
         await supabase.from('settings').upsert(mapToDb(settings));

@@ -47,9 +47,9 @@ const Contact = () => {
         
         {/* Page Header */}
         <div className="text-center mb-16 space-y-3">
-          <span className="text-[11px] font-semibold text-neon-blue uppercase tracking-[0.2em]">Contact Hub</span>
-          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Connect With Us</h1>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
+          <span className="text-[11px] font-semibold text-[#F97316] uppercase tracking-[0.2em]">Contact Hub</span>
+          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-[#0F172A]">Connect With Us</h1>
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base">
             Reach out for enterprise partnerships, general support requests, or application bug reports.
           </p>
           <div className="neon-divider w-24 mx-auto pt-2" />
@@ -61,10 +61,10 @@ const Contact = () => {
           {/* Contact Details Panel (2/5 size) */}
           <div className="lg:col-span-2 space-y-8">
             <div className="space-y-4">
-              <h2 className="text-2xl font-display font-bold text-white border-l-4 border-neon-blue pl-4">
+              <h2 className="text-2xl font-display font-bold text-[#0F172A] border-l-4 border-[#F97316] pl-4">
                 Support Channels
               </h2>
-              <p className="text-gray-400 text-sm leading-relaxed font-light">
+              <p className="text-gray-600 text-sm leading-relaxed font-light">
                 Our support desk coordinates active updates and logs errors. Reach out directly or complete the contact form to open a ticket.
               </p>
             </div>
@@ -73,37 +73,37 @@ const Contact = () => {
             <div className="space-y-6">
               
               {/* Mail */}
-              <div className="glass-panel p-5 rounded-2xl flex items-start space-x-4">
-                <div className="p-3 rounded-lg bg-neon-blue/10 border border-neon-blue/20">
-                  <Mail className="h-5 w-5 text-neon-blue" />
+              <div className="glass-panel p-5 rounded-2xl flex items-start space-x-4 bg-white border border-slate-200 shadow-sm">
+                <div className="p-3 rounded-lg bg-[#F97316]/10 border border-[#F97316]/20">
+                  <Mail className="h-5 w-5 text-[#F97316]" />
                 </div>
                 <div>
-                  <h4 className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Email Address</h4>
-                  <a href={`mailto:${settings.contactEmail}`} className="text-white hover:text-neon-blue text-sm font-medium transition-colors">
+                  <h4 className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Email Address</h4>
+                  <a href={`mailto:${settings.contactEmail}`} className="text-[#0F172A] hover:text-[#F97316] text-sm font-medium transition-colors">
                     {settings.contactEmail}
                   </a>
                 </div>
               </div>
 
               {/* Phone */}
-              <div className="glass-panel p-5 rounded-2xl flex items-start space-x-4">
-                <div className="p-3 rounded-lg bg-neon-blue/10 border border-neon-blue/20">
-                  <Phone className="h-5 w-5 text-neon-blue" />
+              <div className="glass-panel p-5 rounded-2xl flex items-start space-x-4 bg-white border border-slate-200 shadow-sm">
+                <div className="p-3 rounded-lg bg-[#F97316]/10 border border-[#F97316]/20">
+                  <Phone className="h-5 w-5 text-[#F97316]" />
                 </div>
                 <div>
-                  <h4 className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Direct Telephone</h4>
-                  <span className="text-white text-sm font-medium">{settings.contactPhone}</span>
+                  <h4 className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Direct Telephone</h4>
+                  <span className="text-[#0F172A] text-sm font-medium">{settings.contactPhone}</span>
                 </div>
               </div>
 
               {/* Address */}
-              <div className="glass-panel p-5 rounded-2xl flex items-start space-x-4">
-                <div className="p-3 rounded-lg bg-neon-blue/10 border border-neon-blue/20">
-                  <MapPin className="h-5 w-5 text-neon-blue" />
+              <div className="glass-panel p-5 rounded-2xl flex items-start space-x-4 bg-white border border-slate-200 shadow-sm">
+                <div className="p-3 rounded-lg bg-[#F97316]/10 border border-[#F97316]/20">
+                  <MapPin className="h-5 w-5 text-[#F97316]" />
                 </div>
                 <div>
-                  <h4 className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Headquarters</h4>
-                  <span className="text-white text-sm font-medium leading-relaxed block">{settings.address}</span>
+                  <h4 className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Headquarters</h4>
+                  <span className="text-[#0F172A] text-sm font-medium leading-relaxed block">{settings.address}</span>
                 </div>
               </div>
 
@@ -113,25 +113,25 @@ const Contact = () => {
           {/* Form Panel (3/5 size) */}
           <div className="lg:col-span-3">
             {submitted ? (
-              <div className="glass-panel p-8 md:p-12 rounded-3xl text-center space-y-6 border border-neon-blue/40">
+              <div className="glass-panel p-8 md:p-12 rounded-3xl text-center space-y-6 bg-white border border-slate-200 shadow-xl">
                 <CheckCircle2 className="h-16 w-16 text-green-400 mx-auto glow-pulse rounded-full" />
                 <div className="space-y-2">
-                  <h3 className="text-white font-extrabold text-2xl font-display">Message Transmitted</h3>
-                  <p className="text-gray-400 text-sm max-w-sm mx-auto leading-relaxed font-light">
+                  <h3 className="text-[#0F172A] font-extrabold text-2xl font-display">Message Transmitted</h3>
+                  <p className="text-gray-600 text-sm max-w-sm mx-auto leading-relaxed font-light">
                     Thank you for reaching out. We have logged your support query and dispatched it to our press queues. An engineer will respond shortly.
                   </p>
                 </div>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="text-xs font-bold text-neon-blue hover:underline bg-neon-blue/10 border border-neon-blue/30 px-5 py-2.5 rounded-lg transition-all"
+                  className="text-xs font-bold text-[#F97316] hover:brightness-110 bg-[#F97316]/10 border border-[#F97316]/20 px-5 py-2.5 rounded-lg transition-all"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
-              <div className="glass-panel p-8 rounded-3xl border border-space-border/60">
-                <h3 className="text-white font-bold text-lg font-display mb-6 flex items-center space-x-2">
-                  <MessageSquareCode className="h-5 w-5 text-neon-blue" />
+              <div className="glass-panel p-8 rounded-3xl bg-white border border-slate-200 shadow-sm">
+                <h3 className="text-[#0F172A] font-bold text-lg font-display mb-6 flex items-center space-x-2">
+                  <MessageSquareCode className="h-5 w-5 text-[#F97316]" />
                   <span>File Support Ticket</span>
                 </h3>
                 
@@ -140,28 +140,28 @@ const Contact = () => {
                     
                     {/* Name */}
                     <div className="space-y-2">
-                      <label className="text-gray-400 text-xs font-semibold uppercase tracking-wider">Your Name</label>
+                      <label className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Your Name</label>
                       <input
                         type="text"
                         name="name"
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full bg-space-dark/80 border border-space-border/60 focus:border-neon-blue focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-100 placeholder-gray-500"
+                        className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-all"
                         placeholder="John Doe"
                       />
                     </div>
 
                     {/* Email */}
                     <div className="space-y-2">
-                      <label className="text-gray-400 text-xs font-semibold uppercase tracking-wider">Email Address</label>
+                      <label className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Email Address</label>
                       <input
                         type="email"
                         name="email"
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full bg-space-dark/80 border border-space-border/60 focus:border-neon-blue focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-100 placeholder-gray-500"
+                        className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-all"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -169,27 +169,27 @@ const Contact = () => {
 
                   {/* Subject */}
                   <div className="space-y-2">
-                    <label className="text-gray-400 text-xs font-semibold uppercase tracking-wider">Subject</label>
+                    <label className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Subject</label>
                     <input
                       type="text"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full bg-space-dark/80 border border-space-border/60 focus:border-neon-blue focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-100 placeholder-gray-500"
+                      className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-all"
                       placeholder="App Bug Report, Partnership, etc."
                     />
                   </div>
 
                   {/* Message */}
                   <div className="space-y-2">
-                    <label className="text-gray-400 text-xs font-semibold uppercase tracking-wider">Message Details</label>
+                    <label className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Message Details</label>
                     <textarea
                       name="message"
                       required
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full bg-space-dark/80 border border-space-border/60 focus:border-neon-blue focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-100 placeholder-gray-500 resize-none"
+                      className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 px-4 text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-all resize-none"
                       placeholder="Please write your detailed request here..."
                     />
                   </div>
@@ -198,7 +198,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="flex items-center justify-center space-x-2 w-full text-center text-sm font-semibold text-space-darkest bg-gradient-to-r from-neon-blue to-blue-500 hover:brightness-110 shadow-neon-glow py-3.5 rounded-xl transition-all"
+                    className="flex items-center justify-center space-x-2 w-full text-center text-sm font-semibold text-white bg-[#F97316] hover:bg-[#EA580C] shadow-[0_4px_14px_rgba(249,115,22,0.25)] py-3.5 rounded-xl transition-all"
                   >
                     <Send className="h-4 w-4" />
                     <span>{submitting ? 'Transmitting...' : 'Dispatch Ticket'}</span>

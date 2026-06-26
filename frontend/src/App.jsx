@@ -27,6 +27,11 @@ import ManageAbout from './admin/ManageAbout';
 const App = () => {
   const location = useLocation();
 
+  // Reset scroll to top on route change
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Check if current route is an admin management console view (excludes admin login)
   const isAdminConsoleRoute = location.pathname.startsWith('/admin') && location.pathname !== '/admin/login';
 

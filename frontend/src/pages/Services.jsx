@@ -5,37 +5,37 @@ const Services = () => {
   const servicesList = [
     {
       title: 'App Development',
-      icon: <Smartphone className="h-6 w-6 text-neon-blue" />,
+      icon: <Smartphone className="h-6 w-6 text-[#F97316]" />,
       desc: 'Engineering high-performance client applications for Android and iOS systems. We design secure SDK layers, local caching mechanisms, and native hardware hooks.',
       features: ['Native Kotlin & Swift integrations', 'Cross-platform React Native layouts', 'Low-power system resource allocation', 'App Store and Google Play deployment']
     },
     {
       title: 'Web Architectures',
-      icon: <Globe className="h-6 w-6 text-neon-blue" />,
+      icon: <Globe className="h-6 w-6 text-[#F97316]" />,
       desc: 'Developing fast, production-ready web platforms and software-as-a-service (SaaS) databases. We focus on light page sizes, SEO, and robust CRUD routing structures.',
       features: ['Vite, React & NextJS frontends', 'NodeJS Express API backends', 'MongoDB & SQL database clusters', 'Secure JWT token authentication']
     },
     {
       title: 'AI Solutions',
-      icon: <Brain className="h-6 w-6 text-neon-blue" />,
+      icon: <Brain className="h-6 w-6 text-[#F97316]" />,
       desc: 'Building intelligent modules that process workflows automatically. We develop local transcription engines, visual matching clusters, and custom transformer adapters.',
       features: ['Transcription & voice analysis', 'Visual classifier integrations', 'Private on-device ML runtimes', 'Predictive modeling algorithms']
     },
     {
       title: 'UI/UX Design',
-      icon: <Palette className="h-6 w-6 text-neon-blue" />,
+      icon: <Palette className="h-6 w-6 text-[#F97316]" />,
       desc: 'Crafting responsive user interfaces centered on clarity, micro-sound cues, and premium dark assets. We build design systems that scale from smartphones to desktops.',
       features: ['Futuristic Glassmorphism tokens', 'Tailwind-optimized color palettes', 'Fluid transitions & animations', 'Accessibility compliance validation']
     },
     {
       title: 'Software Development',
-      icon: <Code className="h-6 w-6 text-neon-blue" />,
+      icon: <Code className="h-6 w-6 text-[#F97316]" />,
       desc: 'Writing optimized libraries and utility tools to automate system management, file structures, and data encryption. We build software that performs with zero lag.',
       features: ['Cross-platform shell utilities', 'Secure file encryption pipelines', 'Automated data backup modules', 'Custom hardware driver overlays']
     },
     {
       title: 'Cloud Solutions',
-      icon: <Cloud className="h-6 w-6 text-neon-blue" />,
+      icon: <Cloud className="h-6 w-6 text-[#F97316]" />,
       desc: 'Architecting distributed database instances and download networks. We secure your uploads, manage Cloudinary storage pools, and optimize APK delivery speeds.',
       features: ['Distributed server clusters', 'Content Delivery Network (CDN) pools', 'Cloudinary resource management', 'API endpoint firewalls & telemetry']
     }
@@ -51,10 +51,10 @@ const Services = () => {
         
         {/* Page Header */}
         <div className="text-center mb-16 space-y-3">
-          <span className="text-[11px] font-semibold text-neon-blue uppercase tracking-[0.2em]">Our Capabilities</span>
-          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Services & Capabilities</h1>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
-            Nexvora provides top-tier technology development across mobile, web, artificial intelligence, and cloud architectures.
+          <span className="text-[11px] font-semibold text-[#F97316] uppercase tracking-[0.2em]">Our Capabilities</span>
+          <h1 className="text-4xl md:text-5xl font-display font-extrabold text-[#0F172A]">Services & Capabilities</h1>
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base">
+            GoTop Technologies provides top-tier technology development across mobile, web, artificial intelligence, and cloud architectures.
           </p>
           <div className="neon-divider w-24 mx-auto pt-2" />
         </div>
@@ -69,24 +69,24 @@ const Services = () => {
               <div className="space-y-4">
                 {/* Header Icon */}
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 rounded-lg bg-neon-blue/10 border border-neon-blue/20">
+                  <div className="p-3 rounded-lg bg-[#F97316]/10 border border-[#F97316]/20">
                     {service.icon}
                   </div>
-                  <h3 className="text-white font-bold text-lg font-display">{service.title}</h3>
+                  <h3 className="text-[#0F172A] font-bold text-lg font-display">{service.title}</h3>
                 </div>
                 
                 {/* Description */}
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {service.desc}
                 </p>
               </div>
 
               {/* Bullet Features */}
-              <div className="mt-6 pt-6 border-t border-space-border/40">
+              <div className="mt-6 pt-6 border-t border-slate-100">
                 <ul className="space-y-2">
                   {service.features.map((feat, fIdx) => (
-                    <li key={fIdx} className="flex items-start space-x-2 text-xs text-gray-300">
-                      <CheckCircle2 className="h-4 w-4 text-neon-blue shrink-0 mt-0.5" />
+                    <li key={fIdx} className="flex items-start space-x-2 text-xs text-gray-600">
+                      <CheckCircle2 className="h-4 w-4 text-[#F97316] shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -97,10 +97,10 @@ const Services = () => {
         </div>
 
         {/* Development Process Timeline */}
-        <section className="mt-24 glass-panel p-8 md:p-12 rounded-3xl">
+        <section className="mt-24 relative bg-[#0F172A] border border-slate-800 p-8 md:p-12 rounded-3xl overflow-hidden shadow-2xl text-white">
           <div className="text-center mb-12 space-y-2">
             <h2 className="text-2xl font-bold text-white font-display">Our Engineering Protocol</h2>
-            <p className="text-gray-400 text-sm">How we build and launch premium technology platforms.</p>
+            <p className="text-slate-300 text-sm">How we build and launch premium technology platforms.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
@@ -111,13 +111,13 @@ const Services = () => {
               { step: '04', title: 'Scale & Monitor', desc: 'Publishing to CDNs and tracking server uptime and client logs.' }
             ].map((p, idx) => (
               <div key={idx} className="relative space-y-3">
-                <div className="text-3xl font-display font-extrabold text-neon-blue opacity-50">
+                <div className="text-3xl font-display font-extrabold text-[#F97316] opacity-50">
                   {p.step}
                 </div>
                 <h4 className="text-white font-semibold text-base">{p.title}</h4>
-                <p className="text-gray-400 text-xs leading-relaxed">{p.desc}</p>
+                <p className="text-slate-300 text-xs leading-relaxed">{p.desc}</p>
                 {idx < 3 && (
-                  <div className="hidden md:block absolute top-6 -right-4 w-8 h-[1px] bg-neon-blue/30" />
+                  <div className="hidden md:block absolute top-6 -right-4 w-8 h-[1px] bg-[#F97316]/30" />
                 )}
               </div>
             ))}
