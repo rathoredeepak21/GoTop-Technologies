@@ -13,6 +13,9 @@ import AppDetails from './pages/AppDetails';
 import Downloads from './pages/Downloads';
 import Announcements from './pages/Announcements';
 import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import DMCA from './pages/DMCA';
 
 // Admin Pages
 import Login from './admin/Login';
@@ -56,6 +59,9 @@ const App = () => {
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/dmca" element={<DMCA />} />
 
           {/* Admin Authentication */}
           <Route path="/admin/login" element={<Login />} />

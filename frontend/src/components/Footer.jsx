@@ -130,9 +130,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
           <p>{settings.footerText || `© 2026 ${settings.companyName}. All rights reserved.`}</p>
           <div className="flex space-x-6">
-            <a href="#" className="hover:text-[#F97316] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#F97316] transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-[#F97316] transition-colors">DMCA Compliance</a>
+            <Link to="/privacy" className="hover:text-[#F97316] transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[#F97316] transition-colors">Terms of Service</Link>
+            <Link to="/dmca" className="hover:text-[#F97316] transition-colors">DMCA Compliance</Link>
             <Link to="/contact" className="hover:text-[#F97316] transition-colors">Support</Link>
           </div>
         </div>
