@@ -100,9 +100,9 @@ const Home = () => {
             {/* H1 Heading */}
             <motion.h1 
               variants={itemVariants} 
-              className="text-[28px] xs:text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-[#0F172A] leading-tight"
+              className="text-[26px] xs:text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-[#0F172A] leading-tight"
             >
-              Technology That <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#EA580C]">Takes You</span> <br />
+              Technology That <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#EA580C]">Takes You</span> <br className="hidden sm:block" />
               to the Top
             </motion.h1>
   
@@ -115,17 +115,17 @@ const Home = () => {
             </motion.p>
   
             {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-4 px-4 lg:px-0 w-full max-w-md mx-auto lg:mx-0 sm:max-w-none">
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-4 w-full max-w-full lg:max-w-none mx-auto lg:mx-0">
               <Link
                 to="/apps"
-                className="flex items-center space-x-2 w-full sm:w-auto justify-center text-base font-bold text-white bg-[#F97316] hover:bg-[#EA580C] hover:scale-[1.02] active:scale-[0.98] px-8 py-3.5 rounded-xl transition-all duration-300 shadow-[0_4px_14px_rgba(249,115,22,0.25)]"
+                className="flex items-center space-x-2 w-full sm:w-auto justify-center text-base font-bold text-white bg-[#F97316] hover:bg-[#EA580C] hover:scale-[1.02] active:scale-[0.98] px-6 sm:px-8 py-3.5 rounded-xl transition-all duration-300 shadow-[0_4px_14px_rgba(249,115,22,0.25)]"
               >
                 <span>Explore Apps</span>
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <Link
                 to="/about"
-                className="flex items-center justify-center w-full sm:w-auto text-base font-semibold text-[#0F172A] hover:bg-gray-100/50 hover:scale-[1.02] active:scale-[0.98] border border-slate-200 px-8 py-3.5 rounded-xl transition-all duration-300"
+                className="flex items-center justify-center w-full sm:w-auto text-base font-semibold text-[#0F172A] hover:bg-gray-100/50 hover:scale-[1.02] active:scale-[0.98] border border-slate-200 px-6 sm:px-8 py-3.5 rounded-xl transition-all duration-300"
               >
                 <span>Learn More</span>
               </Link>
@@ -217,7 +217,7 @@ const Home = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 break-words">
                     {app.shortDescription || app.description}
                   </p>
                 </div>
@@ -293,7 +293,7 @@ const Home = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-[#0F172A] leading-tight">
-              Why Global Developers Choose <br />
+              Why Global Developers Choose <br className="hidden sm:block" />
               <span className="text-[#F97316] uppercase">{settings.companyName.split(' ')[0]}</span>
             </h2>
             <p className="text-gray-600 leading-relaxed font-light text-sm md:text-base">
@@ -368,29 +368,29 @@ const Home = () => {
       </section>
  
       {/* Call To Action */}
-      <section className="relative z-10 py-24 container-custom text-center">
-        <div className="relative bg-[#0F172A] border border-slate-800 p-12 rounded-3xl overflow-hidden shadow-2xl">
+      <section className="relative z-10 py-16 sm:py-24 container-custom text-center">
+        <div className="relative bg-[#0F172A] border border-slate-800 p-8 sm:p-12 rounded-3xl overflow-hidden shadow-2xl">
           <div className="absolute -top-24 -left-24 w-64 h-64 bg-[#F97316]/10 rounded-full filter blur-[60px]" />
           <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-slate-900/40 rounded-full filter blur-[60px]" />
           
           <div className="relative z-10 space-y-6">
-            <h2 className="text-3xl md:text-5xl font-display font-extrabold text-white">
-              Ready to Upgrade Your <br />Digital Workflow?
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-extrabold text-white">
+              Ready to Upgrade Your <br className="hidden sm:block" />Digital Workflow?
             </h2>
             <p className="text-slate-300 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
               Explore our full suite of tools and games in the download catalog, updated weekly with optimizations.
             </p>
-            <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+            <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4 w-full">
               <Link
                 to="/downloads"
-                className="flex items-center justify-center space-x-2 text-sm font-bold text-white bg-[#F97316] hover:bg-[#EA580C] px-8 py-3.5 rounded-xl transition-all duration-300 shadow-md"
+                className="flex items-center justify-center space-x-2 text-sm font-bold text-white bg-[#F97316] hover:bg-[#EA580C] px-6 sm:px-8 py-3.5 rounded-xl transition-all duration-300 shadow-md w-full sm:w-auto"
               >
                 <Download className="h-4.5 w-4.5" />
                 <span>Visit Download Center</span>
               </Link>
               <Link
                 to="/contact"
-                className="text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 px-8 py-3.5 rounded-xl transition-colors duration-300"
+                className="flex items-center justify-center text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 px-6 sm:px-8 py-3.5 rounded-xl transition-colors duration-300 w-full sm:w-auto"
               >
                 Contact Support
               </Link>

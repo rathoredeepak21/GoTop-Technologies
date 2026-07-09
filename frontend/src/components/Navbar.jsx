@@ -33,17 +33,17 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           
           {/* Logo & Brand */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group shrink-0">
             <img 
               src="/icon.png" 
               alt={settings.companyName} 
-              className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              className="h-8 sm:h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             />
             <div className="flex flex-col">
-              <span className="font-display font-extrabold text-xl tracking-tight text-[#0F172A]">
+              <span className="font-display font-extrabold text-lg sm:text-xl tracking-tight text-[#0F172A]">
                 {settings.companyName.split(' ')[0]}
               </span>
-              <span className="text-[9px] tracking-[0.2em] text-[#F97316] font-bold uppercase leading-none mt-0.5">
+              <span className="text-[8px] sm:text-[9px] tracking-[0.2em] text-[#F97316] font-bold uppercase leading-none mt-0.5">
                 {settings.companyName.split(' ').slice(1).join(' ') || 'TECHNOLOGIES'}
               </span>
             </div>

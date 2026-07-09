@@ -220,30 +220,30 @@ const Apps = () => {
                     </div>
                     
                     {/* Short Description */}
-                    <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                    <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 break-words">
                       {app.shortDescription || app.description}
                     </p>
                   </div>
 
                   {/* Metadata and Actions */}
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
-                    <div className="text-[11px] text-gray-500 space-y-0.5">
+                  <div className="pt-4 border-t border-slate-100 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-4">
+                    <div className="text-[11px] text-gray-500 space-y-0.5 w-full xs:w-auto">
                       <div>Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
                       <div>Version: <span className="text-gray-700 font-semibold font-mono">v{app.version}</span></div>
                     </div>
                     
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-2 w-full xs:w-auto">
                       <Link
                         to={`/apps/details/${app.slug}`}
-                        className="px-3 py-2 text-xs font-semibold text-[#0F172A] hover:bg-gray-100/50 border border-slate-200 rounded-lg transition-colors"
+                        className="flex-1 xs:flex-none text-center px-3 py-2 text-xs font-semibold text-[#0F172A] hover:bg-gray-100/50 border border-slate-200 rounded-lg transition-colors"
                       >
                         Details
                       </Link>
                       <Link
                         to={`/apps/details/${app.slug}?action=download`}
-                        className="flex items-center space-x-1.5 px-3 py-2 text-xs font-semibold text-white bg-[#F97316] hover:bg-[#EA580C] rounded-lg transition-all"
+                        className="flex-1 xs:flex-none flex items-center justify-center space-x-1.5 px-3 py-2 text-xs font-semibold text-white bg-[#F97316] hover:bg-[#EA580C] rounded-lg transition-all"
                       >
-                        <Download className="h-3 w-3" />
+                        <Download className="h-3 w-3 shrink-0" />
                         <span>Download</span>
                       </Link>
                     </div>

@@ -398,16 +398,16 @@ const AppDetails = () => {
                 </div>
                 
                 {/* Short stats */}
-                <div className="flex items-center justify-center md:justify-start space-x-6 text-xs text-gray-500">
+                <div className="flex items-center justify-center md:justify-start space-x-4 md:space-x-6 text-xs text-gray-500 w-full flex-wrap gap-y-2">
                   <div className="flex items-center space-x-1.5">
-                    <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                    <Star className="h-4 w-4 text-yellow-500 fill-yellow-500 shrink-0" />
                     <span className="text-[#0F172A] font-bold text-sm">{app.rating}</span>
                     <span>/ 5.0</span>
                   </div>
-                  <div>Downloads: <span className="text-gray-700 font-semibold">{(app.downloadCount || 0).toLocaleString()}</span></div>
-                  <div>Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
+                  <div className="whitespace-nowrap">Downloads: <span className="text-gray-700 font-semibold">{(app.downloadCount || 0).toLocaleString()}</span></div>
+                  <div className="whitespace-nowrap">Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
                 </div>
-                <p className="text-gray-600 text-sm font-light max-w-xl leading-relaxed">
+                <p className="text-gray-600 text-sm font-light max-w-xl leading-relaxed break-words">
                   {app.shortDescription || app.description}
                 </p>
               </div>
@@ -507,7 +507,7 @@ const AppDetails = () => {
           <div className="lg:col-span-2 space-y-8">
             
             {/* Tabs Headers */}
-            <div className="flex border-b border-slate-200">
+            <div className="flex border-b border-slate-200 overflow-x-auto whitespace-nowrap scrollbar-none" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               {[
                 { id: 'features', label: 'Features Catalog' },
                 { id: 'description', label: 'Overview' },
@@ -563,8 +563,8 @@ const AppDetails = () => {
               {activeTab === 'changelog' && (
                 <div className="space-y-6">
                   {app.changelog && app.changelog.length > 0 ? (
-                    <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
-                      <table className="w-full text-left text-sm">
+                    <div className="border border-slate-200 rounded-2xl overflow-x-auto bg-white shadow-sm scrollbar-none">
+                      <table className="w-full min-w-[400px] text-left text-sm">
                         <thead className="bg-gray-50 text-gray-500 text-xs uppercase border-b border-slate-200">
                           <tr>
                             <th className="p-4">Version</th>

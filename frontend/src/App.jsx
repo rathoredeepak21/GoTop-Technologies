@@ -39,7 +39,7 @@ const App = () => {
   const isAdminConsoleRoute = location.pathname.startsWith('/admin') && location.pathname !== '/admin/login';
 
   return (
-    <div className="relative min-h-screen bg-space-darkest text-gray-100 font-sans flex flex-col justify-between">
+    <div className="relative min-h-screen bg-space-darkest text-gray-100 font-sans flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       
       {/* Particle Animation Background (Active across all public pages) */}
       {!isAdminConsoleRoute && <ParticleBg />}
