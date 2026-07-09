@@ -249,7 +249,8 @@ const AppDetails = () => {
             features: data.features || [],
             apkDownloadUrl: data.apk_download_url,
             releaseNotes: data.release_notes,
-            active: data.active
+            active: data.active,
+            apk_size: data.apk_size
           };
           setApp(appObj);
           

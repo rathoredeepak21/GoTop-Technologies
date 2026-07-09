@@ -50,7 +50,8 @@ const Home = () => {
             downloadCount: app.download_count || 0,
             iconUrl: app.logo_url,
             screenshots: app.screenshots || [],
-            active: app.active
+            active: app.active,
+            apk_size: app.apk_size
           }));
 
           // Sort by downloadCount and take top 3
