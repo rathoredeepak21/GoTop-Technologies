@@ -18,7 +18,7 @@ const ManageApps = () => {
   const [shortDescription, setShortDescription] = useState('');
   const [category, setCategory] = useState('');
   const [version, setVersion] = useState('');
-  const [size, setSize] = useState('');
+  const [apkSize, setApkSize] = useState('');
   const [rating, setRating] = useState('5.0');
   const [featuresText, setFeaturesText] = useState(''); // Textarea, line-separated
   const [active, setActive] = useState(true);
@@ -96,7 +96,7 @@ const ManageApps = () => {
         screenshots: row.screenshots || [],
         features: row.features || [],
         active: row.active,
-        size: row.size || ''
+        apk_size: row.apk_size
       }));
       setApps(list);
 
@@ -132,7 +132,7 @@ const ManageApps = () => {
     setShortDescription('');
     if (categories.length > 0) setCategory(categories[0].name);
     setVersion('1.0.0');
-    setSize('15 MB');
+    setApkSize('15 MB');
     setRating('5.0');
     setFeaturesText('');
     setActive(true);
@@ -156,7 +156,7 @@ const ManageApps = () => {
     setShortDescription(app.shortDescription || '');
     setCategory(app.category);
     setVersion(app.version);
-    setSize(app.size || '');
+    setApkSize(app.apk_size || '');
     setRating(app.rating?.toString() || '5.0');
     setFeaturesText(app.features ? app.features.join('\n') : '');
     setActive(app.active);
@@ -260,7 +260,7 @@ const ManageApps = () => {
         short_description: shortDescription,
         category_id: categoryId,
         version,
-        size,
+        apk_size: apkSize,
         rating: parseFloat(rating) || 5.0,
         features: featuresText.split('\n').map(f => f.trim()).filter(Boolean),
         logo_url: finalIconUrl,
@@ -370,7 +370,7 @@ const ManageApps = () => {
                     <td className="p-5 font-mono text-xs text-slate-600">v{app.version}</td>
 
                     {/* Size */}
-                    <td className="p-5 text-slate-600">{app.size || 'N/A'}</td>
+                    <td className="p-5 text-slate-600">{app.apk_size}</td>
 
                     {/* Downloads */}
                     <td className="p-5 font-mono text-xs text-[#F97316] font-semibold">{(app.downloadCount || 0).toLocaleString()}</td>
@@ -509,8 +509,8 @@ const ManageApps = () => {
                   <label className="text-gray-500 text-xs font-semibold uppercase tracking-wider">File Size</label>
                   <input
                     type="text"
-                    value={size}
-                    onChange={(e) => setSize(e.target.value)}
+                    value={apkSize}
+                    onChange={(e) => setApkSize(e.target.value)}
                     className="w-full bg-white border border-slate-200 focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] focus:outline-none rounded-xl py-3 px-4 text-sm text-slate-800 placeholder-gray-400 shadow-sm transition-all"
                     placeholder="12.4 MB"
                   />

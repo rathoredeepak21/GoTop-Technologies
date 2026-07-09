@@ -405,7 +405,7 @@ const AppDetails = () => {
                     <span>/ 5.0</span>
                   </div>
                   <div className="whitespace-nowrap">Downloads: <span className="text-gray-700 font-semibold">{(app.downloadCount || 0).toLocaleString()}</span></div>
-                  <div className="whitespace-nowrap">Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
+                  <div className="whitespace-nowrap">Size: <span className="text-gray-700 font-semibold">{app.apk_size}</span></div>
                 </div>
                 <p className="text-gray-600 text-sm font-light max-w-xl leading-relaxed break-words">
                   {app.shortDescription || app.description}
@@ -605,7 +605,7 @@ const AppDetails = () => {
                   { label: 'Published By', value: 'GoTop Technologies' },
                   { label: 'Platform Support', value: app.categorySlug === 'tools' || app.categorySlug === 'entertainment' ? 'Android / APK' : 'Universal Mobile' },
                   { label: 'Latest Release', value: app.changelog && app.changelog[0] ? app.changelog[0].date : 'Recently' },
-                  { label: 'FileSize', value: app.size || 'Unknown' },
+                  { label: 'FileSize', value: app.apk_size },
                   { label: 'Content Safety', value: 'Everyone (PEGI 3)' }
                 ].map((spec, sIdx) => (
                   <div key={sIdx} className="flex justify-between border-b border-slate-150 pb-2">

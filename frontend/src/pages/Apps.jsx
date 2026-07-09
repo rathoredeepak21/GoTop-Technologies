@@ -228,7 +228,7 @@ const Apps = () => {
                   {/* Metadata and Actions */}
                   <div className="pt-4 border-t border-slate-100 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-4">
                     <div className="text-[11px] text-gray-500 space-y-0.5 w-full xs:w-auto">
-                      <div>Size: <span className="text-gray-700 font-semibold">{app.size || 'Unknown'}</span></div>
+                      <div>Size: <span className="text-gray-700 font-semibold">{app.apk_size}</span></div>
                       <div>Version: <span className="text-gray-700 font-semibold font-mono">v{app.version}</span></div>
                     </div>
                     

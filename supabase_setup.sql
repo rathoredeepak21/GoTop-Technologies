@@ -62,7 +62,7 @@ CREATE TABLE public.apps (
     short_description text,
     category_id uuid REFERENCES public.categories(id) ON DELETE SET NULL,
     version text NOT NULL DEFAULT '1.0.0',
-    size text DEFAULT '15 MB',
+    apk_size text DEFAULT '15 MB',
     rating numeric DEFAULT 5.0,
     logo_url text DEFAULT '/logo.png',
     apk_download_url text,

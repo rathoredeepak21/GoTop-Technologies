@@ -34,7 +34,7 @@ const Downloads = () => {
           screenshots: app.screenshots || [],
           apkDownloadUrl: app.apk_download_url,
           active: app.active,
-          size: app.size || '15 MB'
+          apk_size: app.apk_size
         }));
         setApps(list);
       }
@@ -196,7 +196,7 @@ const Downloads = () => {
                           <td className="p-5 text-gray-500 font-mono text-xs">v{app.version}</td>
 
                           {/* Size */}
-                          <td className="p-5 text-gray-500">{app.size || 'Unknown'}</td>
+                          <td className="p-5 text-gray-500">{app.apk_size}</td>
 
                           {/* Rating */}
                           <td className="p-5">
@@ -257,7 +257,7 @@ const Downloads = () => {
                     <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-gray-50 rounded-xl border border-slate-100 text-center text-xs">
                       <div>
                         <div className="text-gray-400 text-[9px] uppercase font-semibold">Size</div>
-                        <div className="text-[#0F172A] font-bold mt-0.5">{app.size || '15 MB'}</div>
+                        <div className="text-[#0F172A] font-bold mt-0.5">{app.apk_size}</div>
                       </div>
                       <div>
                         <div className="text-gray-400 text-[9px] uppercase font-semibold">Rating</div>
